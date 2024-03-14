@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="TagChip" parent="Widget.Material3.Chip.Assist">
+        <item name="android:checkable">false</item>
+        <item name="android:clickable">false</item>
+        <item name="android:focusable">false</item>
+        <item name="rippleColor">@null</item>
+        <item name="chipStrokeWidth">0dp</item>
+        <item name="strokeWidth">0dp</item>
+        <item name="chipBackgroundColor">?attr/cardBgColor</item>
+        <item name="android:textAppearance">@style/ChipText</item>
+    </style>
+
+    <style name="ChipText" parent="TextAppearance.MaterialComponents.Chip">
+        <item name="android:textSize">14sp</item>
+        <item name="android:fontFamily">@font/varela</item>
+    </style>
+
+    <style name="SmallChip" parent="TagChip">
+        <item name="android:paddingTop">4dp</item>
+        <item name="android:paddingBottom">4dp</item>
+        <item name="chipStartPadding">4dp</item>
+        <item name="chipEndPadding">4dp</item>
+        <item name="chipMinTouchTargetSize">0dp</item>
+        <item name="chipMinHeight">0dp</item>
+        <item name="textStartPadding">0dp</item>
+        <item name="textEndPadding">0dp</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">?attr/onCardTextColor</item>
+        <item name="chipBackgroundColor">?attr/onCardColor</item>
+    </style>
+
+    <style name="circleImageView" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+</resources>

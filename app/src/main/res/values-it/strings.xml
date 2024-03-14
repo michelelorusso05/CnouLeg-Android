@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="author_string">Di %1$s</string>
+    <string name="section_gallery">Galleria</string>
+    <string name="section_videos">Video</string>
+    <string name="section_documents">Documenti</string>
+
+    <string-array name="class_level_strings">
+        <item>Scuola elementare</item>
+        <item>Scuola media</item>
+        <item>Scuola superiore</item>
+        <item>Università</item>
+    </string-array>
+
+    <string-array name="subject_strings">
+        <item>Letteratura italiana</item>
+        <item>Matematica</item>
+        <item>Informatica</item>
+        <item>Grammatica inglese</item>
+        <item>Letteratura inglese</item>
+        <item>Storia</item>
+        <item>Chimica</item>
+        <item>Fisica</item>
+        <item>Scienze</item>
+        <item>Biologia</item>
+        <item>Economia</item>
+        <item>Diritto</item>
+    </string-array>
+    <string name="activity_read">Leggi un appunto</string>
+    <string name="settings_connection_section">Impostazioni di connessione</string>
+    <string name="settings_connection_server">Indirizzo del server e URL dell\'API</string>
+    <string name="title_activity_settings">Impostazioni</string>
+</resources>

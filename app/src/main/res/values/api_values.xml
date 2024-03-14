@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="class_level_values" translatable="false">
+        <item>elementary_school</item>
+        <item>middle_school</item>
+        <item>high_school</item>
+        <item>university</item>
+    </string-array>
+
+    <string-array name="subject_values" translatable="false">
+        <item>italian_literature</item>
+        <item>math</item>
+        <item>ict</item>
+        <item>english_grammar</item>
+        <item>english_literature</item>
+        <item>history</item>
+        <item>chemistry</item>
+        <item>physics</item>
+        <item>science</item>
+        <item>biology</item>
+        <item>economy</item>
+        <item>law</item>
+    </string-array>
+
+    <integer-array name="subjects_icons">
+        <item>@drawable/literature_24px</item>
+        <item>@drawable/calculate_24px</item>
+        <item>@drawable/ict_24px</item>
+        <item>@drawable/grammar_24px</item>
+        <item>@drawable/literature_24px</item>
+        <item>@drawable/history_24px</item>
+        <item>@drawable/chemistry_24px</item>
+        <item>@drawable/physics_24px</item>
+        <item>@drawable/science_24px</item>
+        <item>@drawable/biology_24px</item>
+        <item>@drawable/economy_24px</item>
+        <item>@drawable/law_24px</item>
+    </integer-array>
+</resources>

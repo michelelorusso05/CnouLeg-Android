@@ -1,0 +1,39 @@
+<resources>
+    <string name="app_name" translatable="false">CnouLeg</string>
+    <string name="author_string">By %1$s</string>
+    <string name="section_gallery">Gallery</string>
+    <string name="section_videos">Videos</string>
+    <string name="section_documents">Documents</string>
+
+    <string-array name="class_level_strings">
+        <item>Elementary school</item>
+        <item>Middle school</item>
+        <item>High school</item>
+        <item>University</item>
+    </string-array>
+
+    <string-array name="subject_strings">
+        <item>Italian literature</item>
+        <item>Math</item>
+        <item>ICT</item>
+        <item>English grammar</item>
+        <item>English literature</item>
+        <item>History</item>
+        <item>Chemistry</item>
+        <item>Physics</item>
+        <item>Science</item>
+        <item>Biology</item>
+        <item>Economy</item>
+        <item>Law</item>
+    </string-array>
+    <string name="activity_read">Read a note</string>
+    <string name="settings_connection_section">Connection settings</string>
+    <string name="settings_connection_server">Server address and API URL</string>
+    <string name="title_activity_settings">Settings</string>
+
+    <!-- Preference Titles -->
+
+    <!-- Messages Preferences -->
+
+    <!-- Sync Preferences -->
+</resources>
