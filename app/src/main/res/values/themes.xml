@@ -11,14 +11,33 @@
         <item name="onCardColor">#FFDFDFFF</item>
         <item name="onCardTextColor">#FF2F3F4F</item>
 
-        <item name="toolbarStyle">@style/Theme.Custom.Toolbar</item>
+        <item name="toolbarStyle">@style/Theme.CnouLeg.ActionBar</item>
         <item name="alertDialogTheme">@style/AppTheme.MyOldAlertDialog</item>
     </style>
 
     <style name="Theme.CnouLeg" parent="Base.Theme.CnouLeg" />
 
-    <style name="Theme.Custom.Toolbar" parent="Widget.Material3.Toolbar">
+    <style name="Theme.CnouLeg.Fullscreen" parent="Theme.CnouLeg">
+        <item name="android:colorBackground">#141218</item>
+        <item name="android:windowActionBarOverlay">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowLayoutInDisplayCutoutMode" tools:targetApi="o_mr1">shortEdges</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">false</item>
+        <item name="toolbarStyle">@style/Theme.CnouLeg.ActionBar.Translucent</item>
+    </style>
+
+    <style name="Theme.CnouLeg.ActionBar.Translucent" parent="Widget.Material3.Toolbar">
+        <item name="android:background">#66000000</item>
+        <item name="elevation">0dp</item>
+    </style>
+
+    <style name="Theme.CnouLeg.ActionBar" parent="Widget.Material3.Toolbar">
         <item name="android:background">?android:attr/colorBackground</item>
+        <item name="elevation">0dp</item>
     </style>
 
     <style name="AppTheme.MyOldAlertDialog" parent="ThemeOverlay.Material3.MaterialAlertDialog">

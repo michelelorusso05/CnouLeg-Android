@@ -14,11 +14,13 @@
 
     <string-array name="subject_strings">
         <item>Letteratura italiana</item>
+        <item>Grammatica italiana</item>
         <item>Matematica</item>
         <item>Informatica</item>
         <item>Grammatica inglese</item>
         <item>Letteratura inglese</item>
         <item>Storia</item>
+        <item>Geografia</item>
         <item>Chimica</item>
         <item>Fisica</item>
         <item>Scienze</item>
@@ -30,4 +32,14 @@
     <string name="settings_connection_section">Impostazioni di connessione</string>
     <string name="settings_connection_server">Indirizzo del server e URL dell\'API</string>
     <string name="title_activity_settings">Impostazioni</string>
+    <string name="activity_gallery">Galleria</string>
+    <string name="activity_video">Video</string>
+    <string name="allow_storage_title">Salvataggio documenti</string>
+    <string name="allow_storage_desc">Tutti i documenti che apri in CnouLeg sono conservati nella cartella Download. Abbiamo bisogno del tuo permesso per salvare file lì.</string>
+    <string name="section_documents_hint">I documenti aperti saranno salvati nella cartella Download.</string>
+    <string name="rate_note">Valuta questo appunto</string>
+    <string name="rate_note_hint">Le valutazioni rimarranno anonime.</string>
+    <string name="section_comments">Commenti</string>
+    <string name="comment_hint">Scrivi qualcosa…</string>
+    <string name="replying_to">Stai rispondendo a %1$s</string>
 </resources>

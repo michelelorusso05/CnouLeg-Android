@@ -9,11 +9,13 @@
 
     <string-array name="subject_values" translatable="false">
         <item>italian_literature</item>
+        <item>italian_grammar</item>
         <item>math</item>
         <item>ict</item>
         <item>english_grammar</item>
         <item>english_literature</item>
         <item>history</item>
+        <item>geography</item>
         <item>chemistry</item>
         <item>physics</item>
         <item>science</item>
@@ -24,11 +26,13 @@
 
     <integer-array name="subjects_icons">
         <item>@drawable/literature_24px</item>
+        <item>@drawable/grammar_24px</item>
         <item>@drawable/calculate_24px</item>
         <item>@drawable/ict_24px</item>
         <item>@drawable/grammar_24px</item>
         <item>@drawable/literature_24px</item>
         <item>@drawable/history_24px</item>
+        <item>@drawable/geography_24px</item>
         <item>@drawable/chemistry_24px</item>
         <item>@drawable/physics_24px</item>
         <item>@drawable/science_24px</item>

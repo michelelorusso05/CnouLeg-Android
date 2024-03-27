@@ -14,11 +14,13 @@
 
     <string-array name="subject_strings">
         <item>Italian literature</item>
+        <item>Italian grammar</item>
         <item>Math</item>
         <item>ICT</item>
         <item>English grammar</item>
         <item>English literature</item>
         <item>History</item>
+        <item>Geography</item>
         <item>Chemistry</item>
         <item>Physics</item>
         <item>Science</item>
@@ -30,6 +32,16 @@
     <string name="settings_connection_section">Connection settings</string>
     <string name="settings_connection_server">Server address and API URL</string>
     <string name="title_activity_settings">Settings</string>
+    <string name="activity_gallery">Gallery</string>
+    <string name="activity_video">Video</string>
+    <string name="allow_storage_title">Documents download</string>
+    <string name="allow_storage_desc">Every document you open in CnouLeg is stored in your Downloads folder. We need your permission to save files there.</string>
+    <string name="section_documents_hint">Opened documents will be saved in the Downloads folder.</string>
+    <string name="rate_note">Rate this note</string>
+    <string name="rate_note_hint">Ratings will stay anonymous.</string>
+    <string name="section_comments">Comments</string>
+    <string name="comment_hint">Write something…</string>
+    <string name="replying_to">Replying to %1$s</string>
 
     <!-- Preference Titles -->
 

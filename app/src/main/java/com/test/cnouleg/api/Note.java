@@ -17,11 +17,13 @@ public class Note implements Parcelable {
     /*
         Possible values:
         italian_literature
+        italian_grammar
         math
         ict
         english_grammar
         english_literature
         history
+        geography
         chemistry
         physics
         science

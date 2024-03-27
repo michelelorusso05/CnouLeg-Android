@@ -8,11 +8,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.imageview.ShapeableImageView;
 import com.test.cnouleg.api.Author;
@@ -21,8 +19,6 @@ import com.test.cnouleg.api.ValuesTranslator;
 import com.test.cnouleg.utils.SharedUtils;
 
 import java.util.HashMap;
-import java.util.Random;
-import java.util.concurrent.ThreadLocalRandom;
 
 public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder> {
     Context context;
@@ -38,7 +34,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(context).inflate(R.layout.item_article, parent, false));
+        return new ViewHolder(LayoutInflater.from(context).inflate(R.layout.item_note, parent, false));
     }
 
     @Override
@@ -53,6 +49,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
         holder.description.setText(current.getDescription());
         holder.classLevel.setText(ValuesTranslator.getTranslatedClassLevel(context, current.getClassLevel()));
         holder.subject.setText(ValuesTranslator.getTranslatedSubject(context, current.getSubject()));
+        holder.ratings.setText(String.valueOf(current.getAverageRating()));
 
         String server = SharedUtils.GetServer(context);
 
@@ -78,7 +75,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView title, author, description;
-        Chip classLevel, subject;
+        Chip classLevel, subject, ratings;
         View clickableLayout;
         ShapeableImageView picThumb;
         public ViewHolder(@NonNull View itemView) {
@@ -88,6 +85,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
             description = itemView.findViewById(R.id.description);
             classLevel = itemView.findViewById(R.id.class_chip);
             subject = itemView.findViewById(R.id.subject_chip);
+            ratings = itemView.findViewById(R.id.ratings_chip);
             picThumb = itemView.findViewById(R.id.author_profile_pic);
 
             clickableLayout = itemView.findViewById(R.id.rowLayout);

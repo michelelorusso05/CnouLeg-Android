@@ -10,7 +10,7 @@
         <item name="onCardColor">#FF35314F</item>
         <item name="onCardTextColor">#FFBFCFDF</item>
 
-        <item name="toolbarStyle">@style/Theme.Custom.Toolbar</item>
+        <item name="toolbarStyle">@style/Theme.CnouLeg.ActionBar</item>
         <item name="alertDialogTheme">@style/AppTheme.MyOldAlertDialog</item>
     </style>
 </resources>
