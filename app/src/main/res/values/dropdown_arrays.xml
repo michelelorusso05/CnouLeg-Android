@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="programming_languages_values" translatable="false">
+        <item />
+        <item>bash</item>
+        <item>c</item>
+        <item>cpp</item>
+        <item>csharp</item>
+        <item>css</item>
+        <item>dart</item>
+        <item>go</item>
+        <item>java</item>
+        <item>javascript</item>
+        <item>json</item>
+        <item>kotlin</item>
+        <item>markup</item>
+        <item>python</item>
+        <item>regex</item>
+        <item>sql</item>
+        <item>swift</item>
+    </string-array>
+
+    <integer-array name="programming_languages_drawables">
+        <item>@drawable/proglang_drawable_plaintext</item>
+        <item>@drawable/proglang_drawable_bash</item>
+        <item>@drawable/proglang_drawable_c</item>
+        <item>@drawable/proglang_drawable_cpp</item>
+        <item>@drawable/proglang_drawable_csharp</item>
+        <item>@drawable/proglang_drawable_css</item>
+        <item>@drawable/proglang_drawable_dart</item>
+        <item>@drawable/proglang_drawable_go</item>
+        <item>@drawable/proglang_drawable_java</item>
+        <item>@drawable/proglang_drawable_javascript</item>
+        <item>@drawable/proglang_drawable_json</item>
+        <item>@drawable/proglang_drawable_kotlin</item>
+        <item>@drawable/proglang_drawable_html</item>
+        <item>@drawable/proglang_drawable_python</item>
+        <item>@drawable/proglang_drawable_regex</item>
+        <item>@drawable/proglang_drawable_sql</item>
+        <item>@drawable/proglang_drawable_swift</item>
+    </integer-array>
+</resources>

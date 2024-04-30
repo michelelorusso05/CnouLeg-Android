@@ -10,6 +10,7 @@
         <item>Middle school</item>
         <item>High school</item>
         <item>University</item>
+        <item>Other</item>
     </string-array>
 
     <string-array name="subject_strings">
@@ -27,6 +28,7 @@
         <item>Biology</item>
         <item>Economy</item>
         <item>Law</item>
+        <item>Other</item>
     </string-array>
     <string name="activity_read">Read a note</string>
     <string name="settings_connection_section">Connection settings</string>
@@ -40,12 +42,108 @@
     <string name="rate_note">Rate this note</string>
     <string name="rate_note_hint">Ratings will stay anonymous.</string>
     <string name="section_comments">Comments</string>
-    <string name="comment_hint">Write something…</string>
+    <string name="comment_hint">Add a comment…</string>
     <string name="replying_to">Replying to %1$s</string>
+    <string name="posted_on">Posted on %1$s</string>
+    <string name="comment_reply">Reply</string>
+    <string name="comment_load_replies">Load replies</string>
+    <string name="section_search">Notes</string>
+    <string name="section_profile">Profile</string>
+    <string name="profile_teacher">Teacher</string>
+    <string name="profile_teaches">Teaches %1$s at %2$s</string>
+    <string name="profile_teaches_alt">Teaches at %1$s</string>
+    <string name="profile_student">Student</string>
+    <string name="profile_studies">Studies %1$s at %2$s</string>
+    <string name="profile_studies_alt">Studies at %1$s</string>
+    <string name="profile_birthday">Born on %1$s</string>
+    <string name="profile_bio">Bio</string>
+    <string name="profile_info">Info</string>
+    <string name="actvity_registration">Sign up</string>
+    <string name="activity_login">Login</string>
+    <string name="login_title">Welcome back!</string>
+    <string name="login_subtitle">Enter your login info to continue.</string>
+    <string name="form_next">Next</string>
+    <string name="form_end">End</string>
+    <string name="account_guest_name">Guest</string>
+    <string name="account_not_logged_in">You aren\'t logged in yet</string>
+    <string name="account_login_pros_0">Log in to:</string>
+    <string name="account_login_pros_1">Share notes</string>
+    <string name="account_login_pros_2">Write comments</string>
+    <string name="account_login_pros_3">Rate notes and comments</string>
+    <string name="register_0_title">Let\'s start with the basics</string>
+    <string name="register_0_subtitle">Email address, password, and a name that will be visible to others.</string>
+    <string name="register_1_title">Something about you</string>
+    <string name="register_1_subtitle">We won\'t tell anybody, we just wanted to put something here.</string>
+    <string name="register_2_title">All done!</string>
+    <string name="register_2_subtitle">You can add information about yourself and what you\'re studying in the Profile section.</string>
+    <string name="form_email">Email</string>
+    <string name="form_password">Password</string>
+    <string name="form_username">Username</string>
+    <string name="form_birth_date">Birth date</string>
+    <string name="form_gender">Gender</string>
+    <string name="error_email_empty">Enter an email address.</string>
+    <string name="error_email_invalid">Enter a valid email address.</string>
+    <string name="error_username_empty">Enter a username.</string>
+    <string name="error_password_empty">Enter a password.</string>
+    <string name="error_email_already_exists">This email address has already been registered.</string>
+    <string name="error_birthdate_empty">Enter your birth date.</string>
+    <string name="error_gender_empty">Enter your gender.</string>
 
-    <!-- Preference Titles -->
+    <string-array name="genders">
+        <item>Male</item>
+        <item>Female</item>
+        <item>Prefer not to specify</item>
+    </string-array>
 
-    <!-- Messages Preferences -->
+    <string name="settings_profile_section">Profile</string>
+    <string name="settings_profile_logout_title">Logout</string>
+    <string name="settings_profile_logout_desc">Delete stored JWT and log out from your account.</string>
+    <string name="bio_not_set">No description set</string>
+    <string name="activity_edit_profile_details">Profile</string>
+    <string name="menu_choose_image">Choose image</string>
+    <string name="menu_remove_image">Remove image</string>
 
-    <!-- Sync Preferences -->
+    <string-array name="roles">
+        <item>Student</item>
+        <item>Teacher</item>
+        <item>Other</item>
+    </string-array>
+    <string name="activity_note_editor">Write a note</string>
+    <string name="tooltip_header">Insert header</string>
+    <string name="tooltip_bold">Bold</string>
+    <string name="tooltip_italic">Italic</string>
+    <string name="tooltip_strikethrough">Strikethrough</string>
+    <string name="tooltip_unordered_list">Bulleted list</string>
+    <string name="tooltip_ordered_list">Numbered list</string>
+    <string name="tooltip_image">Insert image</string>
+    <string name="tooltip_link">Insert link</string>
+    <string name="tooltip_quotation">Quotation block</string>
+    <string name="tooltip_monospace">Monospace/Inline code</string>
+    <string name="tooltip_code_block">Code block</string>
+    <string name="tooltip_table">Insert table</string>
+    <string name="tooltip_horizontal_rule">Insert horizontal rule</string>
+    <string name="tooltip_latex">Insert LaTeX (equation) block</string>
+
+    <string-array name="programming_languages" translatable="false">
+        <item>Plaintext</item>
+        <item>Bash</item>
+        <item>C</item>
+        <item>C++</item>
+        <item>C#</item>
+        <item>CSS</item>
+        <item>Dart</item>
+        <item>Go</item>
+        <item>Java</item>
+        <item>JavaScript</item>
+        <item>JSON</item>
+        <item>Kotlin</item>
+        <item>Markup (HTML, XML, ...)</item>
+        <item>Python</item>
+        <item>RegEx</item>
+        <item>SQL</item>
+        <item>Swift</item>
+    </string-array>
+    <string name="table_header">Column %1$d</string>
+    <string name="table_content">Content</string>
+    <string name="action_add">Add</string>
 </resources>

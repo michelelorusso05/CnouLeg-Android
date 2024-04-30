@@ -10,6 +10,7 @@
         <item>Scuola media</item>
         <item>Scuola superiore</item>
         <item>Università</item>
+        <item>Altro</item>
     </string-array>
 
     <string-array name="subject_strings">
@@ -27,6 +28,7 @@
         <item>Biologia</item>
         <item>Economia</item>
         <item>Diritto</item>
+        <item>Altro</item>
     </string-array>
     <string name="activity_read">Leggi un appunto</string>
     <string name="settings_connection_section">Impostazioni di connessione</string>
@@ -40,6 +42,87 @@
     <string name="rate_note">Valuta questo appunto</string>
     <string name="rate_note_hint">Le valutazioni rimarranno anonime.</string>
     <string name="section_comments">Commenti</string>
-    <string name="comment_hint">Scrivi qualcosa…</string>
+    <string name="comment_hint">Scrivi un commento…</string>
     <string name="replying_to">Stai rispondendo a %1$s</string>
+    <string name="posted_on">Pubblicato il %1$s</string>
+    <string name="comment_reply">Rispondi</string>
+    <string name="comment_load_replies">Carica risposte</string>
+    <string name="section_search">Appunti</string>
+    <string name="section_profile">Profilo</string>
+    <string name="profile_teacher">Docente</string>
+    <string name="profile_teaches">Insegna %1$s presso %2$s</string>
+    <string name="profile_teaches_alt">Insegna presso %1$s</string>
+    <string name="profile_student">Studente</string>
+    <string name="profile_studies">Studia %1$s presso %2$s</string>
+    <string name="profile_studies_alt">Studia presso %1$s</string>
+    <string name="profile_birthday">Nato il %1$s</string>
+    <string name="profile_bio">Bio</string>
+    <string name="profile_info">Informazioni personali</string>
+    <string name="actvity_registration">Registrati</string>
+    <string name="activity_login">Accedi</string>
+    <string name="login_title">Bentornato su CnouLeg!</string>
+    <string name="login_subtitle">Inserisci le tue credenziali per continuare.</string>
+    <string name="form_next">Avanti</string>
+    <string name="form_end">Fine</string>
+    <string name="account_guest_name">Ospite</string>
+    <string name="account_not_logged_in">Non hai ancora fatto l\'accesso</string>
+    <string name="account_login_pros_0">Effettua l\'accesso per:</string>
+    <string name="account_login_pros_1">Pubblicare appunti</string>
+    <string name="account_login_pros_2">Scrivere commenti</string>
+    <string name="account_login_pros_3">Valutare appunti e commenti</string>
+    <string name="register_0_title">Iniziamo dalle basi</string>
+    <string name="register_0_subtitle">Email, password, e un nome con cui sarai riconosciuto dagli altri.</string>
+    <string name="register_1_title">Un po\' su di te</string>
+    <string name="register_1_subtitle">Non diremo niente a nessuno, volevamo solo mettere qualcosa qui.</string>
+    <string name="register_2_title">Tutto pronto!</string>
+    <string name="register_2_subtitle">Puoi aggiungere informazioni su di te e cosa studi nella sezione Profilo.</string>
+    <string name="form_email">Email</string>
+    <string name="form_password">Password</string>
+    <string name="form_username">Nome utente</string>
+    <string name="form_birth_date">Data di nascita</string>
+    <string name="form_gender">Genere</string>
+    <string name="error_email_empty">Inserisci un indirizzo email.</string>
+    <string name="error_email_invalid">Inserisci un indirizzo email valido.</string>
+    <string name="error_username_empty">Inserisci un nome utente.</string>
+    <string name="error_password_empty">Inserisci una password.</string>
+    <string name="error_email_already_exists">Questa mail è stata già registrata.</string>
+    <string name="error_birthdate_empty">Inserisci la tua data di nasita.</string>
+    <string name="error_gender_empty">Inserisci il tuo genere.</string>
+
+    <string-array name="genders">
+        <item>Maschio</item>
+        <item>Femmina</item>
+        <item>Preferisco non specificare</item>
+    </string-array>
+    <string name="settings_profile_section">Profilo</string>
+    <string name="settings_profile_logout_title">Esci</string>
+    <string name="settings_profile_logout_desc">Elimina il JWT salvato ed esci dall\'account.</string>
+    <string name="bio_not_set">Nessuna descrizione impostata</string>
+    <string name="activity_edit_profile_details">Profilo</string>
+    <string name="menu_choose_image">Scegli immagine</string>
+    <string name="menu_remove_image">Rimuovi immagine</string>
+
+    <string-array name="roles">
+        <item>Studente</item>
+        <item>Docente</item>
+        <item>Altro</item>
+    </string-array>
+    <string name="activity_note_editor">Scrivi un appunto</string>
+    <string name="tooltip_header">Inserisci titolo</string>
+    <string name="tooltip_bold">Grassetto</string>
+    <string name="tooltip_italic">Corsivo</string>
+    <string name="tooltip_strikethrough">Barrato</string>
+    <string name="tooltip_unordered_list">Elenco puntato</string>
+    <string name="tooltip_ordered_list">Elenco numerato</string>
+    <string name="tooltip_image">Inserisci immagine</string>
+    <string name="tooltip_link">Inserisci link</string>
+    <string name="tooltip_quotation">Blocco citazione</string>
+    <string name="tooltip_monospace">Caratteri a larghezza fissa/codice inline</string>
+    <string name="tooltip_code_block">Blocco di codice</string>
+    <string name="tooltip_table">Inserisci tabella</string>
+    <string name="tooltip_horizontal_rule">Inserisci barra orizzontale</string>
+    <string name="tooltip_latex">Inserisci blocco LaTeX (equazione)</string>
+    <string name="table_header">Colonna %1$d</string>
+    <string name="table_content">Contenuto</string>
+    <string name="action_add">Aggiungi</string>
 </resources>

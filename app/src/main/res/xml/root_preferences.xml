@@ -6,8 +6,18 @@
             app:icon="@drawable/server_24px"
             app:key="server"
             app:title="@string/settings_connection_server"
-            app:defaultValue="https://cochome.ddns.net/api/note/"
+            app:defaultValue="https://cochome.ddns.net"
             app:useSimpleSummaryProvider="true" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/settings_profile_section">
+
+        <Preference
+            app:icon="@drawable/logout_24px"
+            app:key="logout"
+            app:title="@string/settings_profile_logout_title"
+            app:summary="@string/settings_profile_logout_desc" />
 
     </PreferenceCategory>
 

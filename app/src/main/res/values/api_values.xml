@@ -5,6 +5,7 @@
         <item>middle_school</item>
         <item>high_school</item>
         <item>university</item>
+        <item>other</item>
     </string-array>
 
     <string-array name="subject_values" translatable="false">
@@ -22,6 +23,7 @@
         <item>biology</item>
         <item>economy</item>
         <item>law</item>
+        <item>other</item>
     </string-array>
 
     <integer-array name="subjects_icons">
@@ -39,5 +41,6 @@
         <item>@drawable/biology_24px</item>
         <item>@drawable/economy_24px</item>
         <item>@drawable/law_24px</item>
+        <item>@drawable/other_24px</item>
     </integer-array>
 </resources>

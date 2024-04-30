@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    tools:context=".ActivityEditProfileDetails">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/profile_pic"
+                    android:layout_width="96dp"
+                    android:layout_height="96dp"
+                    android:layout_margin="8dp"
+                    app:shapeAppearanceOverlay="@style/circleImageView"
+                    app:srcCompat="@drawable/account_circle_24px" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/editImageButton"
+                    style="@style/Widget.Material3.Button.IconButton.Filled"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end|bottom"
+                    app:icon="@drawable/photo_camera_24px" />
+
+            </FrameLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="16dp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/bio_text_field"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/profile_bio"
+                app:counterEnabled="true"
+                app:counterMaxLength="300">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="192dp"
+                    android:gravity="top"
+                    android:inputType="textMultiLine|textCapSentences|textAutoCorrect"
+                    android:maxLength="300"
+                    android:overScrollMode="always"
+                    android:scrollbarStyle="insideInset"
+                    android:scrollbars="vertical" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="16dp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/role_text_field"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Ruolo"
+                app:endIconMode="dropdown_menu">
+
+                <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                    android:id="@+id/roleEditText"
+                    style="@style/Widget.Material3.AutoCompleteTextView.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="none" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="16dp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/school_text_field"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Scuola">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text|textCapSentences|textAutoCorrect"
+                    android:maxLength="40" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="16dp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/subject_text_field"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Campo di studi">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text|textCapSentences|textAutoCorrect"
+                    android:maxLength="40" />
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
+
+        <com.google.android.material.progressindicator.CircularProgressIndicator
+            android:id="@+id/formProgressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:indeterminate="true"
+            app:indicatorSize="24dp"
+            app:layout_constraintBottom_toBottomOf="@+id/nextButton"
+            app:layout_constraintEnd_toStartOf="@+id/nextButton"
+            app:layout_constraintTop_toTopOf="@+id/nextButton"
+            android:visibility="gone"
+            app:trackCornerRadius="8dp"
+            app:trackThickness="3dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/nextButton"
+            style="@style/Widget.Material3.Button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:text="Salva"
+            app:layout_constraintVertical_bias="1.0"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

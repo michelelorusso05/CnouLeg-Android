@@ -1,6 +1,5 @@
 package com.test.cnouleg.api;
 
-import android.os.Build;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -13,7 +12,7 @@ public class Note implements Parcelable {
     private String _id;
     private String title;
     @JsonProperty("author_id")
-    private int authorID;
+    private String authorID;
     /*
         Possible values:
         italian_literature
@@ -58,7 +57,7 @@ public class Note implements Parcelable {
     protected Note(Parcel in) {
         _id = in.readString();
         title = in.readString();
-        authorID = in.readInt();
+        authorID = in.readString();
         subject = in.readString();
         classLevel = in.readString();
         tags = in.createStringArray();
@@ -92,7 +91,7 @@ public class Note implements Parcelable {
     public void writeToParcel(@NonNull Parcel dest, int flags) {
         dest.writeString(_id);
         dest.writeString(title);
-        dest.writeInt(authorID);
+        dest.writeString(authorID);
         dest.writeString(subject);
         dest.writeString(classLevel);
         dest.writeStringArray(tags);
@@ -121,11 +120,11 @@ public class Note implements Parcelable {
         this.title = title;
     }
 
-    public int getAuthorID() {
+    public String getAuthorID() {
         return authorID;
     }
 
-    public void setAuthorID(int authorID) {
+    public void setAuthorID(String authorID) {
         this.authorID = authorID;
     }
 

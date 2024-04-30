@@ -12,22 +12,27 @@ public class Comment implements Parcelable {
     private String _id;
     private String text;
     @JsonProperty("user_id")
-    private int userID;
+    private String userID;
     @JsonProperty("post_id")
     private String postID;
     @JsonProperty("parent_id")
     private String parentID;
     private int likes;
     private String date;
+    @JsonProperty("has_children")
+    private boolean hasChildren;
+
+    public Comment() {}
 
     protected Comment(Parcel in) {
         _id = in.readString();
         text = in.readString();
-        userID = in.readInt();
+        userID = in.readString();
         postID = in.readString();
         parentID = in.readString();
         likes = in.readInt();
         date = in.readString();
+        hasChildren = (in.readInt() > 0);
     }
 
     public static final Creator<Comment> CREATOR = new Creator<Comment>() {
@@ -51,11 +56,12 @@ public class Comment implements Parcelable {
     public void writeToParcel(@NonNull Parcel dest, int flags) {
         dest.writeString(_id);
         dest.writeString(text);
-        dest.writeInt(userID);
+        dest.writeString(userID);
         dest.writeString(postID);
         dest.writeString(parentID);
         dest.writeInt(likes);
         dest.writeString(date);
+        dest.writeInt(hasChildren ? 1 : 0);
     }
 
     public String getId() {
@@ -74,11 +80,11 @@ public class Comment implements Parcelable {
         this.text = text;
     }
 
-    public int getUserID() {
+    public String getUserID() {
         return userID;
     }
 
-    public void setUserID(int userID) {
+    public void setUserID(String userID) {
         this.userID = userID;
     }
 
@@ -112,5 +118,13 @@ public class Comment implements Parcelable {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public boolean hasChildren() {
+        return hasChildren;
+    }
+
+    public void setHasChildren(boolean hasChildren) {
+        this.hasChildren = hasChildren;
     }
 }

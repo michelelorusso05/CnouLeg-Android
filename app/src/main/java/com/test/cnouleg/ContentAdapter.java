@@ -2,7 +2,6 @@ package com.test.cnouleg;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.InsetDrawable;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.content.res.AppCompatResources;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -36,7 +34,7 @@ public class ContentAdapter extends RecyclerView.Adapter<ContentAdapter.ViewHold
 
     private static class DownloadMetadataWrapper {
         DownloadMetadataWrapper() {
-            status = ReaderActivity.STATUS_DOWNLOAD_NO_OP;
+            status = FragmentReader.STATUS_DOWNLOAD_NO_OP;
             file = null;
             mime = null;
         }
@@ -50,7 +48,7 @@ public class ContentAdapter extends RecyclerView.Adapter<ContentAdapter.ViewHold
         public String mime;
     }
 
-    private final String PAYLOAD = "status_update";
+    private static final String PAYLOAD = "status_update";
 
 
     public ContentAdapter(Context ctx, String id, ArrayList<Content> a, BiConsumer<String, OnDownloadFinishedCallback> onDownload) {
@@ -152,7 +150,7 @@ public class ContentAdapter extends RecyclerView.Adapter<ContentAdapter.ViewHold
                 */
                 holder.preview.setImageResource(R.drawable.document_24px);
                 holder.clickableLayout.setOnClickListener((v) -> {
-                    contentStatus[position].status = ReaderActivity.STATUS_DOWNLOAD_RUNNING;
+                    contentStatus[position].status = FragmentReader.STATUS_DOWNLOAD_RUNNING;
                     notifyItemChanged(position, PAYLOAD);
                     onDownloadAction.accept(contents.get(position).getPath(),
                         (status, uri, mime) -> {
@@ -168,26 +166,24 @@ public class ContentAdapter extends RecyclerView.Adapter<ContentAdapter.ViewHold
     public void onBindViewHolder(@NonNull ViewHolder holder, int position, @NonNull List<Object> payloads) {
         if (payloads.isEmpty())
             onBindViewHolder(holder, position);
-        else {
-            if (payloads.contains(PAYLOAD)) {
-                switch (contentStatus[position].status) {
-                    case ReaderActivity.STATUS_DOWNLOAD_RUNNING:
-                        holder.preview.setImageAlpha(102);
-                        holder.progressBar.setVisibility(View.VISIBLE);
-                        break;
-                    case ReaderActivity.STATUS_DOWNLOAD_SUCCEDED:
-                        holder.clickableLayout.setOnClickListener((v) -> {
-                            Intent openFileIntent = new Intent(Intent.ACTION_VIEW);
-                            openFileIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
-                            openFileIntent.setDataAndType(contentStatus[position].file, contentStatus[position].mime);
-                            context.startActivity(openFileIntent);
-                        });
-                    case ReaderActivity.STATUS_DOWNLOAD_NO_OP:
-                    default:
-                        holder.preview.setImageAlpha(255);
-                        holder.progressBar.setVisibility(View.GONE);
-                        break;
-                }
+        else if (payloads.contains(PAYLOAD)) {
+            switch (contentStatus[position].status) {
+                case FragmentReader.STATUS_DOWNLOAD_RUNNING:
+                    holder.preview.setImageAlpha(102);
+                    holder.progressBar.setVisibility(View.VISIBLE);
+                    break;
+                case FragmentReader.STATUS_DOWNLOAD_SUCCEDED:
+                    holder.clickableLayout.setOnClickListener((v) -> {
+                        Intent openFileIntent = new Intent(Intent.ACTION_VIEW);
+                        openFileIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+                        openFileIntent.setDataAndType(contentStatus[position].file, contentStatus[position].mime);
+                        context.startActivity(openFileIntent);
+                    });
+                case FragmentReader.STATUS_DOWNLOAD_NO_OP:
+                default:
+                    holder.preview.setImageAlpha(255);
+                    holder.progressBar.setVisibility(View.GONE);
+                    break;
             }
         }
     }

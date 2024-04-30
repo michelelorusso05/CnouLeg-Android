@@ -1,0 +1,454 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ActivityNoteEditor"
+    tools:ignore="UnusedAttribute">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipToPadding="false"
+            android:orientation="vertical"
+            android:paddingHorizontal="16dp"
+            android:paddingTop="16dp"
+            android:paddingBottom="64dp">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/title_text_field"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Titolo">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text|textCapSentences|textAutoCorrect" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="16dp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/subject_text_field"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Materia"
+                app:endIconMode="dropdown_menu">
+
+                <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                    android:id="@+id/subjectEditText"
+                    style="@style/Widget.Material3.AutoCompleteTextView.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="none" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="16dp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/school_text_field"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Scuola"
+                app:endIconMode="dropdown_menu">
+
+                <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                    android:id="@+id/schoolEditText"
+                    style="@style/Widget.Material3.AutoCompleteTextView.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="none" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="16dp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tag_text_field"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Tag (max. 3)">
+
+                <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                    android:id="@+id/tagEditText"
+                    style="@style/Widget.Material3.AutoCompleteTextView.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text|textCapWords|textAutoCorrect|textMultiLine" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/tagsContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"></com.google.android.material.chip.ChipGroup>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="16dp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/description_text_field"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Descrizione">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="192dp"
+                    android:gravity="top"
+                    android:inputType="textMultiLine|textCapSentences|textAutoCorrect"
+                    android:overScrollMode="always"
+                    android:scrollbarStyle="insideInset"
+                    android:scrollbars="vertical" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="16dp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/markdown_text_field"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Markdown">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="top"
+                    android:inputType="textMultiLine|textCapSentences|textAutoCorrect"
+                    android:minHeight="384dp"
+                    android:overScrollMode="always"
+                    android:scrollbarStyle="insideInset"
+                    android:scrollbars="vertical" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="16dp" />
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="?attr/cardBgColor"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fadingEdge="horizontal"
+                        android:fontFamily="@font/varela"
+                        android:requiresFadingEdge="horizontal"
+                        android:text="Anteprima"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="16dp" />
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/markdown"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/varela"
+                            android:text="Hello World!" />
+                    </FrameLayout>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/imagesContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:cardBackgroundColor="?attr/cardBgColor"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fadingEdge="horizontal"
+                        android:fontFamily="@font/varela"
+                        android:requiresFadingEdge="horizontal"
+                        android:text="@string/section_gallery"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:alpha="0.8"
+                        android:fontFamily="@font/varela"
+                        android:text="Max. 10 elementi"
+                        android:textSize="14sp" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/imagesRecyclerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:fadingEdgeLength="16dp"
+                        android:requiresFadingEdge="horizontal" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/videosContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:cardBackgroundColor="?attr/cardBgColor"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/varela"
+                        android:text="@string/section_videos"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:alpha="0.8"
+                        android:fontFamily="@font/varela"
+                        android:text="Max. 5 elementi"
+                        android:textSize="14sp" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/videosRecyclerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:fadingEdgeLength="16dp"
+                        android:requiresFadingEdge="horizontal" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/documentsContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:cardBackgroundColor="?attr/cardBgColor"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/varela"
+                        android:text="@string/section_documents"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:alpha="0.8"
+                        android:fontFamily="@font/varela"
+                        android:text="Max. 5 elementi"
+                        android:textSize="14sp" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/documentsRecyclerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:fadingEdgeLength="16dp"
+                        android:requiresFadingEdge="horizontal" />
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <HorizontalScrollView
+        android:id="@+id/format_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="?attr/colorSurfaceContainerHigh"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/format_header"
+                style="@style/Widget.Material3.Button.IconButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:tooltipText="@string/tooltip_header"
+                app:icon="@drawable/format_title_24px" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/format_bold"
+                style="@style/Widget.Material3.Button.IconButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:tooltipText="@string/tooltip_bold"
+                app:icon="@drawable/format_bold_24px" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/format_italic"
+                style="@style/Widget.Material3.Button.IconButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:tooltipText="@string/tooltip_italic"
+                app:icon="@drawable/format_italic_24px" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/format_strikethrough"
+                style="@style/Widget.Material3.Button.IconButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:tooltipText="@string/tooltip_strikethrough"
+                app:icon="@drawable/format_strikethrough_24px" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/format_ulist"
+                style="@style/Widget.Material3.Button.IconButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:tooltipText="@string/tooltip_unordered_list"
+                app:icon="@drawable/format_list_bulleted_24px" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/format_olist"
+                style="@style/Widget.Material3.Button.IconButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:tooltipText="@string/tooltip_ordered_list"
+                app:icon="@drawable/format_list_numbered_24px" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/format_image"
+                style="@style/Widget.Material3.Button.IconButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:tooltipText="@string/tooltip_image"
+                app:icon="@drawable/format_image_24px" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/format_link"
+                style="@style/Widget.Material3.Button.IconButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:tooltipText="@string/tooltip_link"
+                app:icon="@drawable/format_link_24px" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/format_quotation"
+                style="@style/Widget.Material3.Button.IconButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:tooltipText="@string/tooltip_quotation"
+                app:icon="@drawable/format_quote_24px" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/format_monospace"
+                style="@style/Widget.Material3.Button.IconButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:tooltipText="@string/tooltip_monospace"
+                app:icon="@drawable/format_monospace_24px" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/format_code"
+                style="@style/Widget.Material3.Button.IconButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:tooltipText="@string/tooltip_code_block"
+                app:icon="@drawable/format_code_24px" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/format_table"
+                style="@style/Widget.Material3.Button.IconButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:tooltipText="@string/tooltip_table"
+                app:icon="@drawable/format_table_24px" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/format_horizontalrule"
+                style="@style/Widget.Material3.Button.IconButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:tooltipText="@string/tooltip_horizontal_rule"
+                app:icon="@drawable/horizontal_rule_24px" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/format_function"
+                style="@style/Widget.Material3.Button.IconButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:tooltipText="@string/tooltip_latex"
+                app:icon="@drawable/format_function_24px" />
+
+        </LinearLayout>
+
+    </HorizontalScrollView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/send_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"
+        android:clickable="true"
+        app:srcCompat="@drawable/send_24px"
+        android:focusable="true" />
+
+</FrameLayout>

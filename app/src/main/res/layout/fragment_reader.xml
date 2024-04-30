@@ -1,0 +1,413 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clipToPadding="false"
+    android:orientation="vertical"
+    android:paddingHorizontal="16dp">
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="16dp" />
+
+    <TextView
+        android:id="@+id/titleView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/varela"
+        android:textSize="34sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/postDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:alpha="0.8"
+        android:fontFamily="@font/varela"
+        android:layout_marginVertical="4dp"
+        android:textSize="14sp" />
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="-8dp"
+        app:cardBackgroundColor="?android:attr/colorBackground"
+        app:cardCornerRadius="24dp"
+        app:cardElevation="0dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="8dp">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/author_profile_pic"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                app:shapeAppearanceOverlay="@style/circleImageView"
+                app:srcCompat="@drawable/account_circle_24px" />
+
+            <TextView
+                android:id="@+id/authorView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:alpha="0.8"
+                android:fontFamily="@font/varela"
+                android:textSize="16sp"/>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="16dp" />
+
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/tagsContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/subject_chip"
+            style="@style/TagChip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:chipIcon="@drawable/calculate_24px"
+            app:chipIconSize="24dp"
+            app:chipMinTouchTargetSize="0dp" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/class_chip"
+            style="@style/TagChip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:chipMinTouchTargetSize="0dp" />
+
+        <com.google.android.material.chip.Chip
+            style="@style/TagChip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:chipMinTouchTargetSize="0dp" />
+
+        <com.google.android.material.chip.Chip
+            style="@style/TagChip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:chipMinTouchTargetSize="0dp" />
+
+        <com.google.android.material.chip.Chip
+            style="@style/TagChip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:chipMinTouchTargetSize="0dp" />
+
+        <com.google.android.material.chip.Chip
+            style="@style/TagChip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:chipMinTouchTargetSize="0dp" />
+
+        <com.google.android.material.chip.Chip
+            style="@style/TagChip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:chipMinTouchTargetSize="0dp" />
+
+    </com.google.android.material.chip.ChipGroup>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="16dp" />
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="?attr/cardBgColor"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="0dp">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/markdown"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/varela"
+                android:text="Hello World!" />
+        </FrameLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/imagesContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:cardBackgroundColor="?attr/cardBgColor"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="0dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fadingEdge="horizontal"
+                android:fontFamily="@font/varela"
+                android:requiresFadingEdge="horizontal"
+                android:text="@string/section_gallery"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/imagesRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fadingEdgeLength="16dp"
+                android:requiresFadingEdge="horizontal" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/videosContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:cardBackgroundColor="?attr/cardBgColor"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="0dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/varela"
+                android:text="@string/section_videos"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/videosRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fadingEdgeLength="16dp"
+                android:requiresFadingEdge="horizontal" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/documentsContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:cardBackgroundColor="?attr/cardBgColor"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="0dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/varela"
+                android:text="@string/section_documents"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:alpha="0.8"
+                android:fontFamily="@font/varela"
+                android:text="@string/section_documents_hint"
+                android:textSize="14sp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/documentsRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fadingEdgeLength="16dp"
+                android:requiresFadingEdge="horizontal" />
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/ratingsContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:cardBackgroundColor="?attr/cardBgColor"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="0dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/varela"
+                android:text="@string/rate_note"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:alpha="0.8"
+                android:fontFamily="@font/varela"
+                android:text="@string/rate_note_hint"
+                android:textSize="14sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:paddingTop="16dp"
+                    android:paddingBottom="16dp">
+
+                    <TextView
+                        android:id="@+id/rating_text_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/varela"
+                        android:gravity="center"
+                        android:textSize="28sp"
+                        android:textStyle="bold"
+                        app:drawableStartCompat="@drawable/star_24px" />
+
+                    <TextView
+                        android:id="@+id/rating_count_text_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:alpha="0.8"
+                        android:fontFamily="@font/varela"
+                        android:gravity="center"
+                        android:textSize="14sp"
+                        app:drawableStartCompat="@drawable/person_24px" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="16dp"
+                    android:alpha="0.5"
+                    android:background="@android:color/darker_gray" />
+
+                <LinearLayout
+                    android:id="@+id/ratingButtonsContainer"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.button.MaterialButton
+                        style="?attr/materialIconButtonStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="0dp"
+                        android:padding="0dp"
+                        app:icon="@drawable/custom_star_button"
+                        app:iconSize="28dp"
+                        app:rippleColor="@android:color/transparent" />
+
+                    <com.google.android.material.button.MaterialButton
+                        style="?attr/materialIconButtonStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="0dp"
+                        android:padding="0dp"
+                        app:icon="@drawable/custom_star_button"
+                        app:iconSize="28dp"
+                        app:rippleColor="@android:color/transparent" />
+
+                    <com.google.android.material.button.MaterialButton
+                        style="?attr/materialIconButtonStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="0dp"
+                        android:padding="0dp"
+                        app:icon="@drawable/custom_star_button"
+                        app:iconSize="28dp"
+                        app:rippleColor="@android:color/transparent" />
+
+                    <com.google.android.material.button.MaterialButton
+                        style="?attr/materialIconButtonStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="0dp"
+                        android:padding="0dp"
+                        app:icon="@drawable/custom_star_button"
+                        app:iconSize="28dp"
+                        app:rippleColor="@android:color/transparent" />
+
+                    <com.google.android.material.button.MaterialButton
+                        style="?attr/materialIconButtonStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="0dp"
+                        android:padding="0dp"
+                        app:icon="@drawable/custom_star_button"
+                        app:iconSize="28dp"
+                        app:rippleColor="@android:color/transparent" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="32dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/varela"
+        android:text="@string/section_comments"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+</LinearLayout>

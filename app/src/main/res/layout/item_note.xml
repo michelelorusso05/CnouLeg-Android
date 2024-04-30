@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginTop="16dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="16dp"
-    android:layout_marginVertical="8dp"
-    app:cardBackgroundColor="?attr/cardBgColor"
+    style="?attr/materialCardViewElevatedStyle"
+    app:strokeWidth="0dp"
     app:cardCornerRadius="16dp"
     app:cardElevation="0dp"
+    app:cardBackgroundColor="?attr/cardBgColor"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent">
@@ -23,7 +25,7 @@
         android:orientation="vertical"
         android:padding="16dp">
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/card_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -45,7 +47,7 @@
                 app:shapeAppearanceOverlay="@style/circleImageView"
                 app:srcCompat="@drawable/account_circle_24px" />
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/card_author"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -59,7 +61,17 @@
         <com.google.android.material.chip.ChipGroup
             style="@style/SmallChip"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/ratings_chip"
+                style="@style/SmallChip"
+                android:checked="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="4.3"
+                app:chipIcon="@drawable/star_24px"
+                app:chipIconSize="14dp" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/class_chip"
@@ -74,19 +86,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Matematica" />
-
-            <com.google.android.material.chip.Chip
-                android:id="@+id/ratings_chip"
-                style="@style/SmallChip"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="4.3"
-                app:chipIcon="@drawable/star_24px"
-                app:chipIconSize="14dp"
-                android:visibility="gone"/>
         </com.google.android.material.chip.ChipGroup>
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -96,4 +98,4 @@
 
     </LinearLayout>
 
-</androidx.cardview.widget.CardView>
+</com.google.android.material.card.MaterialCardView>

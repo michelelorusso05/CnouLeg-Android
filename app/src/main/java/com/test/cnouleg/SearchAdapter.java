@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,7 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.imageview.ShapeableImageView;
-import com.test.cnouleg.api.Author;
+import com.google.android.material.textview.MaterialTextView;
+import com.test.cnouleg.api.Profile;
 import com.test.cnouleg.api.Note;
 import com.test.cnouleg.api.ValuesTranslator;
 import com.test.cnouleg.utils.SharedUtils;
@@ -23,8 +23,8 @@ import java.util.HashMap;
 public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder> {
     Context context;
     Note[] notes;
-    HashMap<Integer, Author> authorHashMap;
-    public SearchAdapter(Context ctx, Note[] a, HashMap<Integer, Author> authors) {
+    HashMap<String, Profile> authorHashMap;
+    public SearchAdapter(Context ctx, Note[] a, HashMap<String, Profile> authors) {
         context = ctx;
         notes = a;
         authorHashMap = authors;
@@ -40,12 +40,11 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Note current = notes[position];
-        Author author = authorHashMap.get(current.getAuthorID());
+        Profile author = authorHashMap.get(current.getAuthorID());
         assert author != null;
 
-
         holder.title.setText(current.getTitle());
-        holder.author.setText(author.getName());
+        holder.author.setText(author.getUsername());
         holder.description.setText(current.getDescription());
         holder.classLevel.setText(ValuesTranslator.getTranslatedClassLevel(context, current.getClassLevel()));
         holder.subject.setText(ValuesTranslator.getTranslatedSubject(context, current.getSubject()));
@@ -53,15 +52,17 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
 
         String server = SharedUtils.GetServer(context);
 
-        Glide
-            .with(context)
-            .load(server + "/profile_pics/" + author.getProfilePicURL())
-            .placeholder(R.drawable.account_circle_24px)
-            .into(holder.picThumb)
-        ;
+        if (author.getProfilePicURL() != null && !author.getProfilePicURL().isEmpty()) {
+            Glide
+                .with(context)
+                .load(server + "/profile_pics/" + author.getProfilePicURL())
+                .placeholder(R.drawable.account_circle_24px)
+                .into(holder.picThumb)
+            ;
+        }
 
         holder.clickableLayout.setOnClickListener((v) -> {
-            Intent activity = new Intent(context, ReaderActivity.class);
+            Intent activity = new Intent(context, ActivityReader.class);
             activity.putExtra("note", notes[position]);
             activity.putExtra("author", author);
             context.startActivity(activity);
@@ -74,7 +75,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView title, author, description;
+        MaterialTextView title, author, description;
         Chip classLevel, subject, ratings;
         View clickableLayout;
         ShapeableImageView picThumb;
