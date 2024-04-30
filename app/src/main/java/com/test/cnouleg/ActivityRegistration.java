@@ -3,26 +3,12 @@ package com.test.cnouleg;
 import android.os.Bundle;
 import android.view.MenuItem;
 
-import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
-
-import com.google.android.material.appbar.MaterialToolbar;
-import com.google.android.material.datepicker.MaterialDatePicker;
-import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
-import com.google.android.material.textfield.TextInputLayout;
-import com.google.android.material.textview.MaterialTextView;
-
-import java.util.Date;
 
 public class ActivityRegistration extends AppCompatActivity {
 
@@ -60,9 +46,8 @@ public class ActivityRegistration extends AppCompatActivity {
 
         RegistrationFormViewModel registrationFormViewModel = new ViewModelProvider(this).get(RegistrationFormViewModel.class);
 
-        registrationFormViewModel.getUiState().observe(this, registrationFormState -> {
-            viewPager.setCurrentItem(registrationFormState.step, true);
-        });
+        registrationFormViewModel.getUiState().observe(this, registrationFormState ->
+                viewPager.setCurrentItem(registrationFormState.step, true));
     }
 
     @Override

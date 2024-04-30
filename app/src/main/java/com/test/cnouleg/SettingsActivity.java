@@ -4,13 +4,11 @@ import android.os.Bundle;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 
 import com.google.android.material.snackbar.Snackbar;
-import com.test.cnouleg.R;
 import com.test.cnouleg.utils.AccessTokenUtils;
 
 public class SettingsActivity extends AppCompatActivity {
@@ -41,7 +39,9 @@ public class SettingsActivity extends AppCompatActivity {
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
             setPreferencesFromResource(R.xml.root_preferences, rootKey);
 
-            findPreference("logout").setOnPreferenceClickListener(preference -> {
+            Preference preference = findPreference("logout");
+            assert preference != null;
+            preference.setOnPreferenceClickListener(p -> {
                 AccessTokenUtils.SaveToken(requireContext(), null);
                 Snackbar.make(requireView(), "Logout effettuato", Snackbar.LENGTH_SHORT).show();
                 return true;
