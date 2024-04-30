@@ -212,9 +212,8 @@ public class ActivityReader extends AppCompatActivity {
                 commentField.setText("");
                 parentReplyingTo = null;
 
-                bottomBar.postDelayed(() -> {
-                    onScrollListener.onScrolled(recyclerView, 0, 0);
-                }, 2000);
+                bottomBar.postDelayed(() ->
+                        onScrollListener.onScrolled(recyclerView, 0, 0), 2000);
             }
         });
 
@@ -279,7 +278,7 @@ public class ActivityReader extends AppCompatActivity {
                     });
                 }
             } catch (Exception e) {
-                e.printStackTrace();
+                throw new RuntimeException(e);
             }
         }, (authorName, parentID) -> {
             commentField.requestFocus();
@@ -324,16 +323,14 @@ public class ActivityReader extends AppCompatActivity {
                     Profile profile = StaticData.getMapper().readValue(new URL(SharedUtils.GetServer(ActivityReader.this) + "/api/users/?include_id[]=" + id),
                             ProfileResults.class).getUsers()[0];
 
-                    runOnUiThread(() -> {
+                    runOnUiThread(() ->
                         Glide
                             .with(ActivityReader.this)
                             .load(SharedUtils.GetServer(this) + "/profile_pics/" + profile.getProfilePicURL())
                             .skipMemoryCache(true)
                             .diskCacheStrategy(DiskCacheStrategy.NONE)
                             .placeholder(R.drawable.account_circle_24px)
-                            .into(commentProfilePic)
-                        ;
-                    });
+                            .into(commentProfilePic));
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
@@ -384,15 +381,15 @@ public class ActivityReader extends AppCompatActivity {
                     authorMapping.put(author.getId(), author);
                 }
 
-                runOnUiThread(() -> {
-                    commentAdapter.addComments(Arrays.asList(commentResults.getComments()), authorMapping);
-                });
+                runOnUiThread(() ->
+                        commentAdapter.addComments(Arrays.asList(commentResults.getComments()), authorMapping));
             } catch (IOException e) {
-                e.printStackTrace();
+               throw new RuntimeException(e);
             }
         }).start();
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public void onBackPressed() {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {

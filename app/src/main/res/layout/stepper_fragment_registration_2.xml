@@ -23,7 +23,8 @@
             app:layout_constraintWidth_max="256dp"
             app:layout_constraintWidth_min="128dp"
             app:layout_constraintWidth_percent="0.6"
-            app:srcCompat="@drawable/hero_girl_2" />
+            app:srcCompat="@drawable/hero_girl_2"
+            android:importantForAccessibility="no" />
 
         <LinearLayout
             android:id="@+id/linearLayout"

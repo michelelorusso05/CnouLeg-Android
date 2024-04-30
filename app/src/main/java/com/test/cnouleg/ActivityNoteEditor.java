@@ -85,17 +85,14 @@ public class ActivityNoteEditor extends AppCompatActivity {
     RecyclerView addedImages, addedVideos, addedDocuments;
     ContentUploadAdapter addedImagesAdapter, addedVideosAdapter, addedDocumentsAdapter;
     ActivityResultLauncher<PickVisualMediaRequest> pickImages =
-            registerForActivityResult(new ActivityResultContracts.PickMultipleVisualMedia(), o -> {
-                addedImagesAdapter.AddData(o);
-            });
+            registerForActivityResult(new ActivityResultContracts.PickMultipleVisualMedia(), o ->
+                    addedImagesAdapter.AddData(o));
     ActivityResultLauncher<PickVisualMediaRequest> pickVideos =
-            registerForActivityResult(new ActivityResultContracts.PickMultipleVisualMedia(), o -> {
-                addedVideosAdapter.AddData(o);
-            });
+            registerForActivityResult(new ActivityResultContracts.PickMultipleVisualMedia(), o ->
+                    addedVideosAdapter.AddData(o));
 
-    ActivityResultLauncher<String> pickDocuments = registerForActivityResult(new ActivityResultContracts.GetMultipleContents(), o -> {
-                addedDocumentsAdapter.AddData(o);
-            });
+    ActivityResultLauncher<String> pickDocuments = registerForActivityResult(new ActivityResultContracts.GetMultipleContents(),
+            o -> addedDocumentsAdapter.AddData(o));
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,9 +100,7 @@ public class ActivityNoteEditor extends AppCompatActivity {
         setContentView(R.layout.activity_note_editor);
 
         sendFab = findViewById(R.id.send_fab);
-        sendFab.setOnClickListener((v) -> {
-            SendNote();
-        });
+        sendFab.setOnClickListener((v) -> SendNote());
 
         titleLayout = findViewById(R.id.title_text_field);
         title = titleLayout.getEditText();
@@ -121,18 +116,16 @@ public class ActivityNoteEditor extends AppCompatActivity {
         schoolEditText.setOnFocusChangeListener((v, hasFocus) -> {
             if (hasFocus) HideKeyboard(v);
         });
-        schoolEditText.setOnItemClickListener((parent, view, position, id) -> {
-            school = getResources().getStringArray(R.array.class_level_values)[position];
-        });
+        schoolEditText.setOnItemClickListener((parent, view, position, id) ->
+                school = getResources().getStringArray(R.array.class_level_values)[position]);
 
         subjectEditText = findViewById(R.id.subjectEditText);
         subjectEditText.setAdapter(new IconArrayAdapter(this, R.array.subject_values, R.array.subject_strings, R.array.subjects_icons));
         subjectEditText.setOnFocusChangeListener((v, hasFocus) -> {
             if (hasFocus) HideKeyboard(v);
         });
-        subjectEditText.setOnItemClickListener((parent, view, position, id) -> {
-            subject = getResources().getStringArray(R.array.subject_values)[position];
-        });
+        subjectEditText.setOnItemClickListener((parent, view, position, id) ->
+                subject = getResources().getStringArray(R.array.subject_values)[position]);
 
         tags = findViewById(R.id.tagsContainer);
 
@@ -157,9 +150,7 @@ public class ActivityNoteEditor extends AppCompatActivity {
                         Chip tagView = (Chip) getLayoutInflater().inflate(R.layout.tag_chip, tags, false);
                         tagView.setText(tag);
                         tagView.setChipIcon(AppCompatResources.getDrawable(ActivityNoteEditor.this, R.drawable.cancel_24px));
-                        tagView.setOnClickListener((v) -> {
-                            tags.removeView(tagView);
-                        });
+                        tagView.setOnClickListener((v) -> tags.removeView(tagView));
                         tags.addView(tagView);
                     }
                     s.clear();
@@ -169,27 +160,24 @@ public class ActivityNoteEditor extends AppCompatActivity {
 
         addedImages = findViewById(R.id.imagesRecyclerView);
         addedImages.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        addedImagesAdapter = new ContentUploadAdapter(this, () -> {
-            pickImages.launch(new PickVisualMediaRequest.Builder()
-                    .setMediaType(ActivityResultContracts.PickVisualMedia.ImageOnly.INSTANCE)
-                    .build());
-        }, "image", 10);
+        addedImagesAdapter = new ContentUploadAdapter(this, () ->
+                pickImages.launch(new PickVisualMediaRequest.Builder()
+                .setMediaType(ActivityResultContracts.PickVisualMedia.ImageOnly.INSTANCE)
+                .build()), "image", 10);
         addedImages.setAdapter(addedImagesAdapter);
 
         addedVideos = findViewById(R.id.videosRecyclerView);
         addedVideos.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        addedVideosAdapter = new ContentUploadAdapter(this, () -> {
-            pickVideos.launch(new PickVisualMediaRequest.Builder()
-                    .setMediaType(ActivityResultContracts.PickVisualMedia.VideoOnly.INSTANCE)
-                    .build());
-        }, "video", 5);
+        addedVideosAdapter = new ContentUploadAdapter(this, () ->
+                pickVideos.launch(new PickVisualMediaRequest.Builder()
+                .setMediaType(ActivityResultContracts.PickVisualMedia.VideoOnly.INSTANCE)
+                .build()), "video", 5);
         addedVideos.setAdapter(addedVideosAdapter);
 
         addedDocuments = findViewById(R.id.documentsRecyclerView);
         addedDocuments.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        addedDocumentsAdapter = new ContentUploadAdapter(this, () -> {
-            pickDocuments.launch("*/*");
-        }, "document", 5);
+        addedDocumentsAdapter = new ContentUploadAdapter(this, () ->
+                pickDocuments.launch("*/*"), "document", 5);
         addedDocuments.setAdapter(addedDocumentsAdapter);
 
         markdownEditText = ((TextInputLayout) findViewById(R.id.markdown_text_field)).getEditText();
@@ -339,9 +327,8 @@ public class ActivityNoteEditor extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                editor.preRender(markdownEditText.getText(), result -> {
-                    result.dispatchTo(markdownEditText.getText());
-                });
+                editor.preRender(markdownEditText.getText(), result ->
+                        result.dispatchTo(markdownEditText.getText()));
             }
         });
 
@@ -441,6 +428,7 @@ public class ActivityNoteEditor extends AppCompatActivity {
 
         return -1;
     }
+    @SuppressWarnings("SameParameterValue")
     private int FindPrevCharIndex(char toFind, CharSequence s, int start) {
         return FindPrevCharIndex(character -> character == toFind, s, start);
     }
@@ -459,6 +447,7 @@ public class ActivityNoteEditor extends AppCompatActivity {
 
         return -1;
     }
+    @SuppressWarnings("unused")
     private int FindNextCharIndex(char toFind, CharSequence s, int start) {
         return FindNextCharIndex(character -> character.equals(toFind), s, start);
     }
@@ -632,9 +621,8 @@ public class ActivityNoteEditor extends AppCompatActivity {
         IconArrayAdapter adapter = new IconArrayAdapter(this, R.array.programming_languages_values, R.array.programming_languages, R.array.programming_languages_drawables);
         languageEditText.setAdapter(adapter);
         languageEditText.setText((String) adapter.getItem(0), false);
-        languageEditText.setOnItemClickListener((parent, view, position, id) -> {
-            selected = position;
-        });
+        languageEditText.setOnItemClickListener((parent, view, position, id) ->
+                selected = position);
 
         new MaterialAlertDialogBuilder(this)
                 .setView(layout)

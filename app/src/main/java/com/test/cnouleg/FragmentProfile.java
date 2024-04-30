@@ -179,9 +179,8 @@ public class FragmentProfile extends Fragment {
                 });
 
             } catch (IOException e) {
-                requireActivity().runOnUiThread(() -> {
-                    Snackbar.make(requireView(), "Il server non ha riconosciuto il JWT.", Snackbar.LENGTH_SHORT).show();
-                });
+                requireActivity().runOnUiThread(() ->
+                        Snackbar.make(requireView(), "Il server non ha riconosciuto il JWT.", Snackbar.LENGTH_SHORT).show());
             }
         }).start();
     }

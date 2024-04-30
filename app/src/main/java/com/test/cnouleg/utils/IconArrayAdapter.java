@@ -12,12 +12,8 @@ import android.widget.Filterable;
 import android.widget.TextView;
 
 import androidx.annotation.ArrayRes;
-import androidx.appcompat.content.res.AppCompatResources;
 
-import com.google.android.material.textview.MaterialTextView;
 import com.test.cnouleg.R;
-
-import org.w3c.dom.Text;
 
 public class IconArrayAdapter extends BaseAdapter implements Filterable {
     Context context;

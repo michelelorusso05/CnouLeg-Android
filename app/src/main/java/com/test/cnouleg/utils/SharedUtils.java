@@ -34,7 +34,7 @@ public class SharedUtils {
         return server;
     }
 
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings({"unchecked", "deprecation"})
     public static <T extends Parcelable> T GetParcelable(Bundle bundle, String name, Class<T> clazz) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU)
             return bundle.getParcelable(name, clazz);

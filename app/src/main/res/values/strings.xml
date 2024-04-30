@@ -153,5 +153,15 @@
     <string name="format_title_5">Header 5</string>
     <string name="format_title_6">Header 6</string>
     <string name="action_already_have_an_account">Already have one?</string>
+    <string name="dialog_url">URL</string>
+    <string name="dialog_showed_text">Displayed text</string>
+    <string name="action_dont_have_an_account">Don\'t have an account?</string>
+    <string name="dialog_language">Language</string>
+    <string name="dialog_language_helper">Choose a language for syntax highlighting. If the language is not on the list, choose Plaintext.</string>
+    <string name="dialog_image_link">Link to the image</string>
+    <string name="dialog_image_alt_text">Alt text</string>
+    <string name="dialog_image_alt_text_helper">Text that will be displayed if the image can\'t be loaded.</string>
+    <string name="label_rows">Rows</string>
+    <string name="label_columns">Columns</string>
 
 </resources>

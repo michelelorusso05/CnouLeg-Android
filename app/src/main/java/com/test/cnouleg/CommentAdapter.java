@@ -110,9 +110,8 @@ public class CommentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                     bottomCard = model.build();
                 }
 
-                commentHolder.loadRepliesButton.setOnClickListener((v) -> {
-                    loadReplies(commentHolder.getBindingAdapterPosition());
-                });
+                commentHolder.loadRepliesButton.setOnClickListener((v) ->
+                        loadReplies(commentHolder.getBindingAdapterPosition()));
 
                 commentHolder.replyButton.setOnClickListener((v) -> {
                     if (onReply != null) {

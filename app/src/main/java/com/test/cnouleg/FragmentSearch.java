@@ -54,9 +54,8 @@ public class FragmentSearch extends Fragment {
         refreshLayout = view.findViewById(R.id.refreshLayout);
 
         createNote = view.findViewById(R.id.create_note_fab);
-        createNote.setOnClickListener((v) -> {
-            startActivity(new Intent(requireContext(), ActivityNoteEditor.class));
-        });
+        createNote.setOnClickListener((v) ->
+                startActivity(new Intent(requireContext(), ActivityNoteEditor.class)));
 
         return view;
     }
@@ -99,12 +98,11 @@ public class FragmentSearch extends Fragment {
                     recyclerView.setAdapter(adapter);
                 });
             } catch (IOException e) {
-                e.printStackTrace();
                 context.runOnUiThread(() -> {
-                    refreshLayout.setRefreshing(false);
-
                     SearchAdapter adapter = new SearchAdapter(context, new Note[0], null);
                     recyclerView.setAdapter(adapter);
+
+                    refreshLayout.setRefreshing(false);
                 });
             }
         }).start();

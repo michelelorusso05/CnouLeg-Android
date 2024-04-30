@@ -28,29 +28,22 @@ import com.canhub.cropper.CropImageContract;
 import com.canhub.cropper.CropImageContractOptions;
 import com.canhub.cropper.CropImageOptions;
 import com.canhub.cropper.CropImageView;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.color.MaterialColors;
 import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.progressindicator.CircularProgressIndicator;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
-import com.test.cnouleg.api.LoginResult;
 import com.test.cnouleg.api.Profile;
 import com.test.cnouleg.utils.AccessTokenUtils;
 import com.test.cnouleg.utils.SharedUtils;
 
-import org.json.JSONObject;
-
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.HashMap;
 
 import okhttp3.Call;
 import okhttp3.Callback;
-import okhttp3.FormBody;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.Request;
@@ -293,7 +286,7 @@ public class ActivityEditProfileDetails extends AppCompatActivity {
                     }
 
                     @Override
-                    public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                    public void onResponse(@NonNull Call call, @NonNull Response response) {
                         if (response.code() == 401) {
                             runOnUiThread(() -> Snackbar.make(nextButton, "Errore di autenticazione", Snackbar.LENGTH_SHORT).show());
                         }

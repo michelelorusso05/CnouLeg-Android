@@ -9,7 +9,7 @@
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Link all'immagine">
+        android:hint="@string/dialog_image_link">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/url_edittext"
@@ -25,8 +25,8 @@
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Testo alternativo"
-        app:helperText="Testo che sarà visualizzato se non sarà possibile caricare l'immagine.">
+        android:hint="@string/dialog_image_alt_text"
+        app:helperText="@string/dialog_image_alt_text_helper">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/alt_text_edittext"

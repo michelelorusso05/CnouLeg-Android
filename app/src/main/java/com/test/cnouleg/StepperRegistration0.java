@@ -172,7 +172,7 @@ public class StepperRegistration0 extends StepperFragment {
             emailEditText.setError(context.getString(R.string.error_email_empty));
             validate = false;
         }
-        else if (!email.matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")) {
+        else if (!email.matches("^([\\w.\\-]+)@([\\w\\-]+)((\\.(\\w){2,4})+)$")) {
             emailEditText.setErrorEnabled(true);
             emailEditText.setError(context.getString(R.string.error_email_invalid));
             validate = false;

@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+@SuppressWarnings("unused")
 public class Profile implements Parcelable {
     @JsonProperty("_id")
     private String id;

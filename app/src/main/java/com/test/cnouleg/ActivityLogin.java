@@ -81,7 +81,7 @@ public class ActivityLogin extends AppCompatActivity {
             }
         });
 
-        ((MaterialButton) findViewById(R.id.registerButton)).setOnClickListener((v) -> {
+        findViewById(R.id.registerButton).setOnClickListener((v) -> {
             Intent i = new Intent(this, ActivityRegistration.class);
             i.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
             startActivity(i);
@@ -161,7 +161,7 @@ public class ActivityLogin extends AppCompatActivity {
             emailEditText.setError(getString(R.string.error_email_empty));
             validate = false;
         }
-        else if (!email.matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")) {
+        else if (!email.matches("^([\\w.\\-]+)@([\\w\\-]+)((\\.(\\w){2,4})+)$")) {
             emailEditText.setErrorEnabled(true);
             emailEditText.setError(getString(R.string.error_email_invalid));
             validate = false;

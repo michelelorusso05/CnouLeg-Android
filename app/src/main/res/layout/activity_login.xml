@@ -22,7 +22,8 @@
             app:layout_constraintWidth_max="256dp"
             app:layout_constraintWidth_min="128dp"
             app:layout_constraintWidth_percent="0.6"
-            app:srcCompat="@drawable/hero_girl_2_alt" />
+            app:srcCompat="@drawable/hero_girl_2_alt"
+            android:importantForAccessibility="no" />
 
         <LinearLayout
             android:id="@+id/linearLayout"
@@ -89,7 +90,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="-8dp"
                 android:layout_marginBottom="16dp"
-                android:text="Non hai un account?" />
+                android:text="@string/action_dont_have_an_account" />
         </LinearLayout>
 
         <com.google.android.material.progressindicator.CircularProgressIndicator

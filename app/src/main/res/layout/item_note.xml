@@ -29,7 +29,6 @@
             android:id="@+id/card_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Sium"
             android:textSize="20sp"
             android:textStyle="bold" />
 
@@ -54,7 +53,6 @@
                 android:layout_marginStart="8dp"
                 android:alpha="0.8"
                 android:fontFamily="@font/varela"
-                android:text="Michele Lorusso"
                 android:textSize="14sp" />
         </LinearLayout>
 
@@ -69,7 +67,6 @@
                 android:checked="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="4.3"
                 app:chipIcon="@drawable/star_24px"
                 app:chipIconSize="14dp" />
 
@@ -77,15 +74,13 @@
                 android:id="@+id/class_chip"
                 style="@style/SmallChip"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Scuola superiore" />
+                android:layout_height="wrap_content" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/subject_chip"
                 style="@style/SmallChip"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Matematica" />
+                android:layout_height="wrap_content" />
         </com.google.android.material.chip.ChipGroup>
 
         <com.google.android.material.textview.MaterialTextView
@@ -93,7 +88,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:alpha="0.8"
-            android:text="TextView"
             android:layout_marginTop="8dp"/>
 
     </LinearLayout>

@@ -37,7 +37,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:fontFamily="@font/varela"
-                    android:text="Ospite"
+                    android:text="@string/account_guest_name"
                     android:textSize="28sp" />
             </LinearLayout>
 
@@ -72,7 +72,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/varela"
-                        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nisi massa, faucibus ut sapien posuere, venenatis condimentum enim. Curabitur lobortis libero vitae placerat elementum. Vestibulum ut rutrum est. Curabitur malesuada nisi quis tortor dapibus mattis. Nunc id erat commodo, rutrum tellus ac, pellentesque lectus. Duis euismod convallis orci, vel mattis lorem auctor in. Vestibulum ligula orci, facilisis egestas vestibulum sed, dapibus non dolor. Proin id tristique nisl, ornare maximus tellus."
                         android:textSize="14sp" />
 
                     <Space
@@ -95,7 +94,6 @@
                         android:drawablePadding="8dp"
                         android:fontFamily="@font/varela"
                         android:gravity="center_vertical"
-                        android:text="Nato il 24/06/2005"
                         android:textSize="14sp"
                         app:drawableStartCompat="@drawable/cake_24px" />
 
@@ -107,7 +105,6 @@
                         android:drawablePadding="8dp"
                         android:fontFamily="@font/varela"
                         android:gravity="center_vertical"
-                        android:text="Studia Informatica presso I.I.S. G.B. Pentasuglia"
                         android:textSize="14sp"
                         app:drawableStartCompat="@drawable/school_24px" />
                 </LinearLayout>
