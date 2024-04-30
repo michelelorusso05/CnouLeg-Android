@@ -146,4 +146,12 @@
     <string name="table_header">Column %1$d</string>
     <string name="table_content">Content</string>
     <string name="action_add">Add</string>
+    <string name="format_title_1">Header 1</string>
+    <string name="format_title_2">Header 2</string>
+    <string name="format_title_3">Header 3</string>
+    <string name="format_title_4">Header 4</string>
+    <string name="format_title_5">Header 5</string>
+    <string name="format_title_6">Header 6</string>
+    <string name="action_already_have_an_account">Already have one?</string>
+
 </resources>

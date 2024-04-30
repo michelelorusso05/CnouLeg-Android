@@ -6,7 +6,6 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.DownloadManager;
 import android.content.BroadcastReceiver;
-import android.content.ContentProvider;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -43,9 +42,9 @@ import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.imageview.ShapeableImageView;
-import com.test.cnouleg.api.Profile;
 import com.test.cnouleg.api.Content;
 import com.test.cnouleg.api.Note;
+import com.test.cnouleg.api.Profile;
 import com.test.cnouleg.api.ValuesTranslator;
 import com.test.cnouleg.utils.SharedUtils;
 

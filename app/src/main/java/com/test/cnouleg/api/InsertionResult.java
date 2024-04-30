@@ -1,5 +1,5 @@
 package com.test.cnouleg.api;
-
+@SuppressWarnings("unused")
 public class InsertionResult {
     String insertedId;
     String uploadDate;

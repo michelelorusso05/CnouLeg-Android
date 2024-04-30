@@ -5,12 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
-import com.google.android.material.button.MaterialButton;
-
 public class StepperRegistration2 extends StepperFragment {
 
     public StepperRegistration2() {}
@@ -27,9 +21,7 @@ public class StepperRegistration2 extends StepperFragment {
         View view = inflater.inflate(R.layout.stepper_fragment_registration_2, container, false);
 
         nextButton = view.findViewById(R.id.nextButton);
-        nextButton.setOnClickListener((v) -> {
-            requireActivity().finish();
-        });
+        nextButton.setOnClickListener((v) -> requireActivity().finish());
 
         return view;
     }

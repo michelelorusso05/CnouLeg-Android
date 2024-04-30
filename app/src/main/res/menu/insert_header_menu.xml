@@ -2,25 +2,25 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/header1"
-        android:title="Titolo 1"/>
+        android:title="@string/format_title_1" />
 
     <item
         android:id="@+id/header2"
-        android:title="Titolo 2" />
+        android:title="@string/format_title_2" />
 
     <item
         android:id="@+id/header3"
-        android:title="Titolo 3" />
+        android:title="@string/format_title_3" />
 
     <item
         android:id="@+id/header4"
-        android:title="Titolo 4" />
+        android:title="@string/format_title_4" />
 
     <item
         android:id="@+id/header5"
-        android:title="Titolo 5" />
+        android:title="@string/format_title_5" />
 
     <item
         android:id="@+id/header6"
-        android:title="Titolo 6" />
+        android:title="@string/format_title_6" />
 </menu>

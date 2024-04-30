@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true">
@@ -24,7 +23,8 @@
             app:layout_constraintWidth_max="256dp"
             app:layout_constraintWidth_min="128dp"
             app:layout_constraintWidth_percent="0.6"
-            app:srcCompat="@drawable/hero_boy" />
+            app:srcCompat="@drawable/hero_boy"
+            android:importantForAccessibility="no" />
 
         <LinearLayout
             android:id="@+id/linearLayout"
@@ -107,7 +107,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="-8dp"
                 android:layout_marginBottom="16dp"
-                android:text="Hai già un account?" />
+                android:text="@string/action_already_have_an_account" />
         </LinearLayout>
 
         <com.google.android.material.progressindicator.CircularProgressIndicator

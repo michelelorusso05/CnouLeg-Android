@@ -6,7 +6,6 @@ import android.util.Base64;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.test.cnouleg.StaticData;
-import com.test.cnouleg.api.LoginResult;
 import com.test.cnouleg.api.Token;
 
 public class AccessTokenUtils {
@@ -26,7 +25,7 @@ public class AccessTokenUtils {
     public static String GetMongoDBIDFromToken(String token) {
         String[] chunks = token.split("\\.");
 
-        String header = new String(Base64.decode(chunks[0], Base64.DEFAULT));
+        // String header = new String(Base64.decode(chunks[0], Base64.DEFAULT));
         String payload = new String(Base64.decode(chunks[1], Base64.DEFAULT));
 
         try {

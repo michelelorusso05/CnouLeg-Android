@@ -7,10 +7,8 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.ListView;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModelProvider;
@@ -20,7 +18,6 @@ import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.MaterialAutoCompleteTextView;
 import com.google.android.material.textfield.TextInputLayout;
-import com.test.cnouleg.api.EmailValidationResult;
 import com.test.cnouleg.utils.SharedUtils;
 
 import java.io.IOException;
@@ -172,9 +169,8 @@ public class StepperRegistration1 extends StepperFragment {
 
                     @Override
                     public void onResponse(@NonNull Call call, @NonNull Response response) {
-                        requireActivity().runOnUiThread(() -> {
-                            registrationFormViewModel.UpdateSecondStep(f_birthdate, f_gender);
-                        });
+                        requireActivity().runOnUiThread(() ->
+                                registrationFormViewModel.UpdateSecondStep(f_birthdate, f_gender));
                     }
                 });
             }
