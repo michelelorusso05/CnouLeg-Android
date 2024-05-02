@@ -135,7 +135,7 @@ public class StepperRegistration0 extends StepperFragment {
                             progressIndicator.setVisibility(View.GONE);
                             nextButton.setEnabled(true);
 
-                            Snackbar.make(nextButton, "Impossibile raggiungere il server", Snackbar.LENGTH_SHORT).show();
+                            Snackbar.make(nextButton, R.string.error_generic_server, Snackbar.LENGTH_SHORT).show();
                         });
                     }
 

@@ -142,4 +142,16 @@
     <string name="dialog_image_alt_text_helper">Testo che sarà visualizzato se non sarà possibile caricare l\'immagine.</string>
     <string name="label_rows">Righe</string>
     <string name="label_columns">Colonne</string>
+    <string name="error_generic_server">Impossibile raggiungere il server.</string>
+    <string name="error_authentication_error">Errore di autenticazione.</string>
+    <string name="error_no_user_found_with_email">Non esiste un utente con questa mail.</string>
+    <string name="error_wrong_password">Password errata.</string>
+    <string name="action_insert">Inserisci</string>
+    <string name="action_insert_image">Inserisci immagine</string>
+    <string name="action_cancel">Annulla</string>
+    <string name="action_insert_link">Inserisci link</string>
+    <string name="action_insert_code_block">Inserisci blocco di codice</string>
+    <string name="action_insert_table">Inserisci tabella</string>
+    <string name="error_unrecognized_token">Il server non ha riconosciuto il JWT.</string>
+    <string name="logout_successful">Logout effettuato</string>
 </resources>

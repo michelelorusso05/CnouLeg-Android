@@ -557,9 +557,9 @@ public class ActivityNoteEditor extends AppCompatActivity {
 
         new MaterialAlertDialogBuilder(this)
                 .setView(layout)
-                .setTitle("Inserisci immagine")
+                .setTitle(R.string.action_insert_image)
                 .setIcon(R.drawable.format_image_24px)
-                .setPositiveButton("Inserisci", (dialogInterface, which) -> {
+                .setPositiveButton(R.string.action_insert, (dialogInterface, which) -> {
                     String toInsert = String.format("![%1$s](%2$s)", altEditText.getText(), urlEditText.getText());
 
                     markdownEditText.getText().replace(
@@ -570,7 +570,7 @@ public class ActivityNoteEditor extends AppCompatActivity {
                             toInsert.length()
                     );
                 })
-                .setNegativeButton("Annulla", (dialogInterface, which) -> dialogInterface.cancel())
+                .setNegativeButton(R.string.action_cancel, (dialogInterface, which) -> dialogInterface.cancel())
                 .show();
     }
     private void InsertLink(View v) {
@@ -582,9 +582,9 @@ public class ActivityNoteEditor extends AppCompatActivity {
 
         new MaterialAlertDialogBuilder(this)
                 .setView(layout)
-                .setTitle("Inserisci link")
+                .setTitle(R.string.action_insert_link)
                 .setIcon(R.drawable.format_link_24px)
-                .setPositiveButton("Inserisci", (dialogInterface, which) -> {
+                .setPositiveButton(R.string.action_insert, (dialogInterface, which) -> {
                     String toInsert = String.format("[%1$s](%2$s)", showedTextEditText.getText(), urlEditText.getText());
 
                     markdownEditText.getText().replace(
@@ -595,7 +595,7 @@ public class ActivityNoteEditor extends AppCompatActivity {
                             toInsert.length()
                     );
                 })
-                .setNegativeButton("Annulla", (dialogInterface, which) -> dialogInterface.cancel())
+                .setNegativeButton(R.string.action_cancel, (dialogInterface, which) -> dialogInterface.cancel())
                 .show();
     }
 
@@ -626,9 +626,9 @@ public class ActivityNoteEditor extends AppCompatActivity {
 
         new MaterialAlertDialogBuilder(this)
                 .setView(layout)
-                .setTitle("Inserisci blocco di codice")
+                .setTitle(R.string.action_insert_code_block)
                 .setIcon(R.drawable.format_code_24px)
-                .setPositiveButton("Inserisci", (dialogInterface, which) -> {
+                .setPositiveButton(R.string.action_insert, (dialogInterface, which) -> {
                     String toInsert = String.format("\n```%1$s\n\n```\n", adapter.getItemValue(selected));
 
                     markdownEditText.getText().replace(
@@ -639,7 +639,7 @@ public class ActivityNoteEditor extends AppCompatActivity {
                             toInsert.length()
                     );
                 })
-                .setNegativeButton("Annulla", (dialogInterface, which) -> dialogInterface.cancel())
+                .setNegativeButton(R.string.action_cancel, (dialogInterface, which) -> dialogInterface.cancel())
                 .show();
     }
 
@@ -662,9 +662,9 @@ public class ActivityNoteEditor extends AppCompatActivity {
 
         new MaterialAlertDialogBuilder(this)
                 .setView(layout)
-                .setTitle("Inserisci tabella")
+                .setTitle(R.string.action_insert_table)
                 .setIcon(R.drawable.format_table_24px)
-                .setPositiveButton("Inserisci", (dialogInterface, which) -> {
+                .setPositiveButton(R.string.action_insert, (dialogInterface, which) -> {
                     int rows = Integer.parseInt(rowsEditText.getText().toString());
                     int columns = Integer.parseInt(columnsEditText.getText().toString());
 
@@ -692,7 +692,7 @@ public class ActivityNoteEditor extends AppCompatActivity {
                             toInsert.length()
                     );
                 })
-                .setNegativeButton("Annulla", (dialogInterface, which) -> dialogInterface.cancel())
+                .setNegativeButton(R.string.action_cancel, (dialogInterface, which) -> dialogInterface.cancel())
                 .show();
     }
 

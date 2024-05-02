@@ -281,14 +281,14 @@ public class ActivityEditProfileDetails extends AppCompatActivity {
                             progressIndicator.setVisibility(View.GONE);
                             nextButton.setEnabled(true);
 
-                            Snackbar.make(nextButton, "Impossibile raggiungere il server", Snackbar.LENGTH_SHORT).show();
+                            Snackbar.make(nextButton, R.string.error_generic_server, Snackbar.LENGTH_SHORT).show();
                         });
                     }
 
                     @Override
                     public void onResponse(@NonNull Call call, @NonNull Response response) {
                         if (response.code() == 401) {
-                            runOnUiThread(() -> Snackbar.make(nextButton, "Errore di autenticazione", Snackbar.LENGTH_SHORT).show());
+                            runOnUiThread(() -> Snackbar.make(nextButton, R.string.error_authentication_error, Snackbar.LENGTH_SHORT).show());
                         }
                         else {
                             finish();

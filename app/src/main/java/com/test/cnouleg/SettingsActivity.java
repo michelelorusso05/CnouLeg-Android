@@ -43,7 +43,7 @@ public class SettingsActivity extends AppCompatActivity {
             assert preference != null;
             preference.setOnPreferenceClickListener(p -> {
                 AccessTokenUtils.SaveToken(requireContext(), null);
-                Snackbar.make(requireView(), "Logout effettuato", Snackbar.LENGTH_SHORT).show();
+                Snackbar.make(requireView(), R.string.logout_successful, Snackbar.LENGTH_SHORT).show();
                 return true;
             });
         }

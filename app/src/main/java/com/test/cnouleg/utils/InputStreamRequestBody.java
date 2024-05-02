@@ -24,7 +24,7 @@ public class InputStreamRequestBody extends RequestBody {
         this.contentResolver = contentResolver;
         this.uri = uri;
         String mime = contentResolver.getType(uri);
-        if (mime == null) mime = "application/octect-stream";
+        if (mime == null) mime = "application/octet-stream";
 
         this.contentType = MediaType.parse(mime);
     }

@@ -163,5 +163,17 @@
     <string name="dialog_image_alt_text_helper">Text that will be displayed if the image can\'t be loaded.</string>
     <string name="label_rows">Rows</string>
     <string name="label_columns">Columns</string>
+    <string name="error_generic_server">Can\'t reach server.</string>
+    <string name="error_authentication_error">Authentication error.</string>
+    <string name="error_no_user_found_with_email">No user with this email found.</string>
+    <string name="error_wrong_password">Incorrect password.</string>
+    <string name="action_insert">Insert</string>
+    <string name="action_insert_image">Insert image</string>
+    <string name="action_cancel">Cancel</string>
+    <string name="action_insert_link">Insert link</string>
+    <string name="action_insert_code_block">Insert code snippet</string>
+    <string name="action_insert_table">Insert table</string>
+    <string name="error_unrecognized_token">Server didn\'t recognize the JWT.</string>
+    <string name="logout_successful">Logged out</string>
 
 </resources>

@@ -120,17 +120,17 @@ public class ActivityLogin extends AppCompatActivity {
                             progressIndicator.setVisibility(View.GONE);
                             nextButton.setEnabled(true);
 
-                            Snackbar.make(nextButton, "Impossibile raggiungere il server", Snackbar.LENGTH_SHORT).show();
+                            Snackbar.make(nextButton, R.string.error_generic_server, Snackbar.LENGTH_SHORT).show();
                         });
                     }
 
                     @Override
                     public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
                         if (response.code() == 404) {
-                            runOnUiThread(() -> emailEditText.setError("Non esiste un utente con questa mail."));
+                            runOnUiThread(() -> emailEditText.setError(getString(R.string.error_no_user_found_with_email)));
                         }
                         else if (response.code() == 401) {
-                            runOnUiThread(() -> passwordEditText.setError("Password errata."));
+                            runOnUiThread(() -> passwordEditText.setError(getString(R.string.error_wrong_password)));
                         }
                         else {
                             String body = response.body().string();
