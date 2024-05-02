@@ -8,7 +8,7 @@
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="URL">
+        android:hint="@string/dialog_url">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/url_edittext"
@@ -24,7 +24,7 @@
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Testo visualizzato">
+        android:hint="@string/dialog_showed_text">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/showed_text_edittext"

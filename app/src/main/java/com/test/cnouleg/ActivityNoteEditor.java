@@ -766,7 +766,7 @@ public class ActivityNoteEditor extends AppCompatActivity {
             }
 
             @Override
-            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+            public void onResponse(@NonNull Call call, @NonNull Response response) {
                 if (response.code() == 401) {
                     // runOnUiThread(() -> Snackbar.make(nextButton, "Errore di autenticazione", Snackbar.LENGTH_SHORT).show());
                 }
