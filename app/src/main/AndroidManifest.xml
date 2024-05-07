@@ -21,10 +21,15 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="tiramisu">
         <activity
-            android:name=".ActivityNoteEditor"
-            android:label="@string/activity_note_editor"
-            android:parentActivityName=".ActivityMain"
+            android:name=".ActivityViewProfileDetails"
+            android:label="@string/activity_edit_profile_details"
+            android:parentActivityName=".ActivityReader"
             android:exported="false" />
+        <activity
+            android:name=".ActivityNoteEditor"
+            android:exported="false"
+            android:label="@string/activity_note_editor"
+            android:parentActivityName=".ActivityMain" />
         <activity
             android:name=".ActivityEditProfileDetails"
             android:exported="false"
@@ -65,8 +70,8 @@
             android:parentActivityName=".ActivityMain" />
         <activity
             android:name=".ActivityMain"
-            android:theme="@style/Theme.CnouLeg.StyledNavigationBar"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/Theme.CnouLeg.StyledNavigationBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

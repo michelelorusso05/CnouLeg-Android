@@ -100,6 +100,7 @@
     <string name="settings_profile_logout_desc">Delete stored JWT and log out from your account.</string>
     <string name="bio_not_set">No description set</string>
     <string name="activity_edit_profile_details">Profile</string>
+    <string name="action_edit_profile_details">Edit profile</string>
     <string name="menu_choose_image">Choose image</string>
     <string name="menu_remove_image">Remove image</string>
 
@@ -175,5 +176,30 @@
     <string name="action_insert_table">Insert table</string>
     <string name="error_unrecognized_token">Server didn\'t recognize the JWT.</string>
     <string name="logout_successful">Logged out</string>
+    <string name="form_role">Role</string>
+    <string name="form_school">School</string>
+    <string name="form_study_field">Field of study</string>
+    <string name="form_save">Save</string>
+    <string name="editor_title">Title</string>
+    <string name="editor_description">Description</string>
+    <string name="editor_class_level">Class</string>
+    <string name="editor_subject">Subject</string>
+    <string name="editor_tags">Tags (max. 5)</string>
+    <string name="editor_markdown">Markdown</string>
+    <string name="editor_preview">Preview</string>
+    <string name="editor_max_10_elements">Max. 10 elements</string>
+    <string name="editor_max_5_elements">Max. 5 elements</string>
+    <string name="hint_log_in">Log in to leave a comment.</string>
+    <string name="action_editor_done">Hide format toolbar</string>
+    <string name="error_empty_title">Enter a title.</string>
+    <string name="error_empty_desc">Enter a description.</string>
+    <string name="error_empty_subject">Select a subject.</string>
+    <string name="error_empty_class_level">Select a class level.</string>
+    <string name="error_empty_markdown">Enter a body.</string>
+    <string name="error_markdown_too_short">Write some more, will you?</string>
+    <string name="label_login_to_rate">Log in to leave a rating.</string>
+    <string name="label_must_be_logged_in">Log in to do that.</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="profile_notes">Shared notes</string>
 
 </resources>

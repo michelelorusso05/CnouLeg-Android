@@ -9,11 +9,13 @@ import android.os.Parcelable;
 import android.provider.OpenableColumns;
 import android.text.format.DateFormat;
 
+import androidx.annotation.ArrayRes;
 import androidx.preference.PreferenceManager;
 
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
@@ -41,6 +43,13 @@ public class SharedUtils {
         else {
             Object obj = bundle.getParcelable(name);
             return (T) obj;
+        }
+    }
+    public static <T extends Parcelable> ArrayList<T> GetParcelableArrayList(Bundle bundle, String name, Class<T> clazz) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU)
+            return bundle.getParcelableArrayList(name, clazz);
+        else {
+            return bundle.getParcelableArrayList(name);
         }
     }
 
@@ -91,5 +100,17 @@ public class SharedUtils {
         returnCursor.close();
 
         return name;
+    }
+
+    public static String GetMatchingString(Context context, @ArrayRes int srcArrRes, @ArrayRes int dstArrRes, String element) {
+        String[] srcArr = context.getResources().getStringArray(srcArrRes);
+        String[] dstArr = context.getResources().getStringArray(dstArrRes);
+
+        for (int i = 0; i < srcArr.length; i++) {
+            if (srcArr[i].contentEquals(element))
+                return dstArr[i];
+        }
+
+        return "";
     }
 }

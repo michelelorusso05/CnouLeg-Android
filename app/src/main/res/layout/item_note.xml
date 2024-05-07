@@ -67,6 +67,7 @@
                 android:checked="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:maxLength="3"
                 app:chipIcon="@drawable/star_24px"
                 app:chipIconSize="14dp" />
 

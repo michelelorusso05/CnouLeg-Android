@@ -1,15 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
+
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".FragmentProfile">
+    tools:context=".FragmentProfile"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingHorizontal="16dp">
 
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:gravity="start|center_vertical"
+        android:orientation="horizontal"
+        android:paddingVertical="8dp">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/profile_pic"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            app:shapeAppearanceOverlay="@style/circleImageView"
+            app:srcCompat="@drawable/account_circle_24px" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/card_author"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:fontFamily="@font/varela"
+            android:text="@string/account_guest_name"
+            android:textSize="28sp" />
+    </LinearLayout>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/infoCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:cardBackgroundColor="?attr/cardBgColor"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="0dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -17,210 +49,183 @@
             android:orientation="vertical"
             android:padding="16dp">
 
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:fontFamily="@font/varela"
+                android:text="@string/profile_bio"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/profile_bio"
+                android:background="@drawable/ripple_button_24"
+                android:layout_marginTop="4dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/varela"
+                android:textSize="14sp" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="16dp" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/varela"
+                android:text="@string/profile_info"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/profile_birthdate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:drawablePadding="8dp"
+                android:fontFamily="@font/varela"
+                android:gravity="center_vertical"
+                android:textSize="14sp"
+                app:drawableStartCompat="@drawable/cake_24px" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/profile_studying"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:drawablePadding="8dp"
+                android:fontFamily="@font/varela"
+                android:gravity="center_vertical"
+                android:textSize="14sp"
+                app:drawableStartCompat="@drawable/school_24px" />
+
+            <com.google.android.material.button.MaterialButton
+                style="@style/Widget.Material3.Button.IconButton.Filled"
+                android:id="@+id/edit_profile_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:icon="@drawable/edit_24px"
+                android:text="@string/action_edit_profile_details"
+                android:layout_marginTop="8dp"
+                app:iconPadding="8dp"
+                android:layout_gravity="center"/>
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/accountFormsCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:cardBackgroundColor="?attr/cardBgColor"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="0dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:gravity="center">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/varela"
+                android:text="@string/account_not_logged_in"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="8dp"/>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/varela"
+                android:text="@string/account_login_pros_0"
+                android:textSize="14sp" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:drawableStart="@drawable/edit_note_24px"
+                android:drawablePadding="8dp"
+                android:fontFamily="@font/varela"
+                android:gravity="center_vertical"
+                android:text="@string/account_login_pros_1"
+                android:textSize="14sp" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:drawableStart="@drawable/comment_24px"
+                android:drawablePadding="8dp"
+                android:fontFamily="@font/varela"
+                android:gravity="center_vertical"
+                android:text="@string/account_login_pros_2"
+                android:textSize="14sp" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:drawableStart="@drawable/rate_24px"
+                android:drawablePadding="8dp"
+                android:fontFamily="@font/varela"
+                android:gravity="center_vertical"
+                android:text="@string/account_login_pros_3"
+                android:textSize="14sp" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="8dp"/>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="start|center_vertical"
                 android:orientation="horizontal"
-                android:paddingVertical="8dp">
+                android:gravity="center">
 
-                <com.google.android.material.imageview.ShapeableImageView
-                    android:id="@+id/profile_pic"
-                    android:layout_width="64dp"
-                    android:layout_height="64dp"
-                    app:shapeAppearanceOverlay="@style/circleImageView"
-                    app:srcCompat="@drawable/account_circle_24px" />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/card_author"
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/loginButton"
+                    style="@style/Widget.Material3.Button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:fontFamily="@font/varela"
-                    android:text="@string/account_guest_name"
-                    android:textSize="28sp" />
+                    android:text="@string/activity_login"/>
+
+                <Space
+                    android:layout_width="8dp"
+                    android:layout_height="match_parent"/>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/registrationButton"
+                    style="@style/Widget.Material3.Button.OutlinedButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/actvity_registration"/>
             </LinearLayout>
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/infoCard"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                app:cardBackgroundColor="?attr/cardBgColor"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="0dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="16dp">
-
-                    <com.google.android.material.textview.MaterialTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="bottom"
-                        android:fontFamily="@font/varela"
-                        android:text="@string/profile_bio"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
-
-                    <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/profile_bio"
-                        android:background="@drawable/ripple_button_24"
-                        android:layout_marginTop="4dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/varela"
-                        android:textSize="14sp" />
-
-                    <Space
-                        android:layout_width="match_parent"
-                        android:layout_height="16dp" />
-
-                    <com.google.android.material.textview.MaterialTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/varela"
-                        android:text="@string/profile_info"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
-
-                    <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/profile_birthdate"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:drawablePadding="8dp"
-                        android:fontFamily="@font/varela"
-                        android:gravity="center_vertical"
-                        android:textSize="14sp"
-                        app:drawableStartCompat="@drawable/cake_24px" />
-
-                    <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/profile_studying"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:drawablePadding="8dp"
-                        android:fontFamily="@font/varela"
-                        android:gravity="center_vertical"
-                        android:textSize="14sp"
-                        app:drawableStartCompat="@drawable/school_24px" />
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/accountFormsCard"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                app:cardBackgroundColor="?attr/cardBgColor"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="0dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="16dp"
-                    android:gravity="center">
-
-                    <com.google.android.material.textview.MaterialTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/varela"
-                        android:text="@string/account_not_logged_in"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
-
-                    <Space
-                        android:layout_width="match_parent"
-                        android:layout_height="8dp"/>
-
-                    <com.google.android.material.textview.MaterialTextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/varela"
-                        android:text="@string/account_login_pros_0"
-                        android:textSize="14sp" />
-
-                    <com.google.android.material.textview.MaterialTextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:drawableStart="@drawable/edit_note_24px"
-                        android:drawablePadding="8dp"
-                        android:fontFamily="@font/varela"
-                        android:gravity="center_vertical"
-                        android:text="@string/account_login_pros_1"
-                        android:textSize="14sp" />
-
-                    <com.google.android.material.textview.MaterialTextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:drawableStart="@drawable/comment_24px"
-                        android:drawablePadding="8dp"
-                        android:fontFamily="@font/varela"
-                        android:gravity="center_vertical"
-                        android:text="@string/account_login_pros_2"
-                        android:textSize="14sp" />
-
-                    <com.google.android.material.textview.MaterialTextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:drawableStart="@drawable/rate_24px"
-                        android:drawablePadding="8dp"
-                        android:fontFamily="@font/varela"
-                        android:gravity="center_vertical"
-                        android:text="@string/account_login_pros_3"
-                        android:textSize="14sp" />
-
-                    <Space
-                        android:layout_width="match_parent"
-                        android:layout_height="8dp"/>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:gravity="center">
-
-                        <com.google.android.material.button.MaterialButton
-                            android:id="@+id/loginButton"
-                            style="@style/Widget.Material3.Button"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/activity_login"/>
-
-                        <Space
-                            android:layout_width="8dp"
-                            android:layout_height="match_parent"/>
-
-                        <com.google.android.material.button.MaterialButton
-                            android:id="@+id/registrationButton"
-                            style="@style/Widget.Material3.Button.OutlinedButton"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/actvity_registration"/>
-                    </LinearLayout>
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-
         </LinearLayout>
+    </androidx.cardview.widget.CardView>
 
-    </ScrollView>
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="24dp"/>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/edit_profile_fab"
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/notesLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="16dp"
-        app:srcCompat="@drawable/edit_24px"
-        android:contentDescription="@string/activity_edit_profile_details"/>
+        android:fontFamily="@font/varela"
+        android:text="@string/profile_notes"
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
-</FrameLayout>
+</LinearLayout>
 

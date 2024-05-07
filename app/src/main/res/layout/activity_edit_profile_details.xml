@@ -57,14 +57,14 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/profile_bio"
                 app:counterEnabled="true"
-                app:counterMaxLength="300">
+                app:counterMaxLength="500">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="192dp"
                     android:gravity="top"
                     android:inputType="textMultiLine|textCapSentences|textAutoCorrect"
-                    android:maxLength="300"
+                    android:maxLength="500"
                     android:overScrollMode="always"
                     android:scrollbarStyle="insideInset"
                     android:scrollbars="vertical" />
@@ -78,7 +78,7 @@
                 android:id="@+id/role_text_field"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Ruolo"
+                android:hint="@string/form_role"
                 app:endIconMode="dropdown_menu">
 
                 <com.google.android.material.textfield.MaterialAutoCompleteTextView
@@ -97,7 +97,7 @@
                 android:id="@+id/school_text_field"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Scuola">
+                android:hint="@string/form_school">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
@@ -114,7 +114,7 @@
                 android:id="@+id/subject_text_field"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Campo di studi">
+                android:hint="@string/form_study_field">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
@@ -146,7 +146,7 @@
             android:layout_marginTop="32dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
-            android:text="Salva"
+            android:text="@string/form_save"
             app:layout_constraintVertical_bias="1.0"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

@@ -87,7 +87,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:gravity="center"
-                android:text="Effettua l'accesso per commentare."
+                android:text="@string/hint_log_in"
                 android:textSize="16sp" />
 
         </FrameLayout>

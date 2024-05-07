@@ -38,6 +38,7 @@ import com.bumptech.glide.RequestBuilder;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
@@ -45,10 +46,14 @@ import com.google.android.material.imageview.ShapeableImageView;
 import com.test.cnouleg.api.Content;
 import com.test.cnouleg.api.Note;
 import com.test.cnouleg.api.Profile;
+import com.test.cnouleg.api.Rating;
+import com.test.cnouleg.api.RatingUpdateResult;
 import com.test.cnouleg.api.ValuesTranslator;
+import com.test.cnouleg.utils.AccessTokenUtils;
 import com.test.cnouleg.utils.SharedUtils;
 
 import java.io.File;
+import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -69,6 +74,12 @@ import io.noties.markwon.syntax.SyntaxHighlightPlugin;
 import io.noties.prism4j.GrammarLocator;
 import io.noties.prism4j.Prism4j;
 import io.noties.prism4j.annotations.PrismBundle;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.MediaType;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 @PrismBundle(includeAll = true, grammarLocatorClassName = ".GrammarLocatorBundle")
 public class FragmentReader extends Fragment {
@@ -77,7 +88,7 @@ public class FragmentReader extends Fragment {
     Context context;
     TextView markdownView;
     TextView title, authorView, dateView;
-    TextView ratingsView, ratingsCountView;
+    TextView ratingsView, ratingsCountView, ratingsSubtext;
     ChipGroup tagsContainer;
     Chip subjectChip;
     Chip classChip;
@@ -86,6 +97,7 @@ public class FragmentReader extends Fragment {
     Note loadedNote;
     Profile author;
     RatingBar ratingBar;
+    View ratingsContainer, ratingAltButton;
     RecyclerView imagesRecyclerView, videosRecyclerView, documentsRecyclerView;
     View imagesContainer, videosContainer, documentsContainer;
 
@@ -143,11 +155,14 @@ public class FragmentReader extends Fragment {
         dateView = view.findViewById(R.id.postDate);
         ratingsView = view.findViewById(R.id.rating_text_view);
         ratingsCountView = view.findViewById(R.id.rating_count_text_view);
+        ratingsSubtext = view.findViewById(R.id.ratingSubtext);
         subjectChip = view.findViewById(R.id.subject_chip);
         classChip = view.findViewById(R.id.class_chip);
         tagsContainer = view.findViewById(R.id.tagsContainer);
         authorProfilePic = view.findViewById(R.id.author_profile_pic);
-        ratingBar = new RatingBar(view.findViewById(R.id.ratingButtonsContainer));
+        ratingsContainer = view.findViewById(R.id.ratingButtonsContainer);
+        ratingAltButton = view.findViewById(R.id.rateLoginButton);
+        ratingBar = new RatingBar((ViewGroup) ratingsContainer);
 
         imagesRecyclerView = view.findViewById(R.id.imagesRecyclerView);
         videosRecyclerView = view.findViewById(R.id.videosRecyclerView);
@@ -161,6 +176,13 @@ public class FragmentReader extends Fragment {
         videosRecyclerView.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
         documentsRecyclerView.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
 
+        View authorClickableLayout = view.findViewById(R.id.authorInfoButton);
+        authorClickableLayout.setOnClickListener((v) -> {
+            Intent i = new Intent(requireContext(), ActivityViewProfileDetails.class);
+            i.putExtra("profile", author);
+            startActivity(i);
+        });
+
         title.setText(loadedNote.getTitle());
         authorView.setText(author.getUsername());
 
@@ -172,11 +194,22 @@ public class FragmentReader extends Fragment {
         java.text.DateFormat format = DateFormat.getDateFormat(context);
 
         dateView.setText(getString(R.string.posted_on, date == null ? "" : format.format(date)));
-        ratingsView.setText(String.valueOf(loadedNote.getAverageRating()));
+        if (loadedNote.getAverageRating() == 0) {
+            ratingsView.setText("--");
+        }
+        else {
+            ratingsView.setText(String.valueOf(loadedNote.getAverageRating()));
+        }
         ratingsCountView.setText(String.valueOf(loadedNote.getNumberOfRatings()));
         subjectChip.setText(ValuesTranslator.getTranslatedSubject(context, loadedNote.getSubject()));
         subjectChip.setChipIcon(ValuesTranslator.getDrawableForSubject(context, loadedNote.getSubject()));
         classChip.setText(ValuesTranslator.getTranslatedClassLevel(context, loadedNote.getClassLevel()));
+
+        ratingAltButton.setOnClickListener((v) -> {
+            Intent i = new Intent(requireContext(), ActivityRegistration.class);
+            i.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+            startActivity(i);
+        });
 
         for (int i = 2; i < tagsContainer.getChildCount(); i++) {
             Chip tag = (Chip) tagsContainer.getChildAt(i);
@@ -226,7 +259,9 @@ public class FragmentReader extends Fragment {
 
                     @Override
                     public void cancel(@NonNull Target<?> target) {
-                        Glide.with(context).clear(target);
+                        try {
+                            Glide.with(context).clear(target);
+                        } catch (Exception ignored) {}
                     }
                 }))
                 .usePlugin(SyntaxHighlightPlugin.create(new Prism4j(locator), codeBlockTheme))
@@ -272,6 +307,24 @@ public class FragmentReader extends Fragment {
         return view;
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        String token = AccessTokenUtils.GetAccessToken(context);
+        if (token == null) {
+            ratingsSubtext.setText(R.string.label_login_to_rate);
+            ratingAltButton.setVisibility(View.VISIBLE);
+            ratingsContainer.setVisibility(View.GONE);
+        }
+        else {
+            ratingAltButton.setVisibility(View.GONE);
+            ratingsContainer.setVisibility(View.VISIBLE);
+            RetreiveRating();
+
+            ratingBar.setOnRateChangedListener(this::RateNote);
+        }
+    }
+
     @SuppressLint("UnspecifiedRegisterReceiverFlag")
     @Override
     public void onResume() {
@@ -289,6 +342,96 @@ public class FragmentReader extends Fragment {
         super.onPause();
 
         requireActivity().unregisterReceiver(onDownloadComplete);
+    }
+
+    private void RetreiveRating() {
+        ratingBar.setEnabled(false);
+
+        String token = AccessTokenUtils.GetAccessToken(context);
+        Request.Builder builder = new Request.Builder()
+                .url(SharedUtils.GetServer(context) + "/api/rate/?note_id=" + loadedNote.getId())
+                .header("authorization", "Bearer " + token)
+                .get();
+
+        StaticData.getClient().newCall(builder.build()).enqueue(new Callback() {
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+
+            }
+
+            @Override
+            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                if (response.code() == 404) {
+                    requireActivity().runOnUiThread(() -> {
+                        ratingBar.setEnabled(true);
+                        ratingBar.setRateAmount(0);
+                    });
+
+                    response.body().close();
+                    return;
+                }
+                if (response.code() != 200) {
+                    response.body().close();
+                    return;
+                }
+
+                Rating rating = StaticData.getMapper().readValue(response.body().bytes(), Rating.class);
+                response.body().close();
+
+                requireActivity().runOnUiThread(() -> {
+                    ratingBar.setEnabled(true);
+                    ratingBar.setRateAmount((int) rating.getRating());
+                });
+            }
+        });
+    }
+
+    private void RateNote(int stars) {
+        ratingBar.setEnabled(false);
+
+        HashMap<String, Object> requestBodyMap = new HashMap<>();
+
+        requestBodyMap.put("note_id", loadedNote.getId());
+        requestBodyMap.put("rating", stars);
+
+        String json;
+        try {
+            json = StaticData.getMapper().writeValueAsString(requestBodyMap);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+
+        RequestBody requestBody = RequestBody.create(json, MediaType.parse("application/json"));
+
+        String token = AccessTokenUtils.GetAccessToken(context);
+        Request.Builder builder = new Request.Builder()
+                .url(SharedUtils.GetServer(context) + "/api/rate/?note_id=" + loadedNote.getId())
+                .header("authorization", "Bearer " + token)
+                .post(requestBody);
+
+        StaticData.getClient().newCall(builder.build()).enqueue(new Callback() {
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+
+            }
+
+            @Override
+            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                if (response.code() != 200) return;
+
+                RatingUpdateResult rating = StaticData.getMapper().readValue(response.body().bytes(), RatingUpdateResult.class);
+
+                requireActivity().runOnUiThread(() -> {
+                    loadedNote.setAverageRating(rating.getRating());
+                    loadedNote.setNumberOfRatings(rating.getNumberOfRatings());
+
+                    ratingsView.setText(String.valueOf(loadedNote.getAverageRating()));
+                    ratingsCountView.setText(String.valueOf(loadedNote.getNumberOfRatings()));
+
+                    ratingBar.setEnabled(true);
+                });
+            }
+        });
     }
 
     private void DownloadFile(String filename, ContentAdapter.OnDownloadFinishedCallback onDownloadEnd) {

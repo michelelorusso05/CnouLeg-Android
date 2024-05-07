@@ -26,6 +26,7 @@ import com.test.cnouleg.utils.SharedUtils;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.HashMap;
 
 public class FragmentSearch extends Fragment {
@@ -33,6 +34,7 @@ public class FragmentSearch extends Fragment {
     private ViewModelSearch viewModel;
 
     RecyclerView recyclerView;
+    SearchAdapter searchAdapter;
     SwipeRefreshLayout refreshLayout;
     FloatingActionButton createNote;
 
@@ -66,6 +68,8 @@ public class FragmentSearch extends Fragment {
 
         refreshLayout.setOnRefreshListener(this::BeginSearch);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
+        searchAdapter = new SearchAdapter(context, null);
+        recyclerView.setAdapter(searchAdapter);
 
         refreshLayout.setRefreshing(true);
 
@@ -93,15 +97,10 @@ public class FragmentSearch extends Fragment {
 
                 context.runOnUiThread(() -> {
                     refreshLayout.setRefreshing(false);
-
-                    SearchAdapter adapter = new SearchAdapter(context, notesResults.getNotes(), authorMapping);
-                    recyclerView.setAdapter(adapter);
+                    searchAdapter.ReplaceNotes(Arrays.asList(notesResults.getNotes()), authorMapping);
                 });
             } catch (IOException e) {
                 context.runOnUiThread(() -> {
-                    SearchAdapter adapter = new SearchAdapter(context, new Note[0], null);
-                    recyclerView.setAdapter(adapter);
-
                     refreshLayout.setRefreshing(false);
                 });
             }

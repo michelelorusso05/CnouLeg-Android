@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.progressindicator.CircularProgressIndicator;
 import com.test.cnouleg.utils.SharedUtils;
@@ -44,7 +45,7 @@ public class ContentUploadAdapter extends RecyclerView.Adapter<ContentUploadAdap
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         if (position == contents.size()) {
             holder.preview.setImageResource(R.drawable.add_24px);
-
+            holder.actionButton.setVisibility(View.GONE);
             holder.clickableLayout.setOnClickListener((v) -> loadData.run());
 
             holder.name.setText(R.string.action_add);
@@ -84,6 +85,9 @@ public class ContentUploadAdapter extends RecyclerView.Adapter<ContentUploadAdap
                 });
                 break;
         }
+
+        holder.actionButton.setVisibility(View.VISIBLE);
+        holder.actionButton.setOnClickListener((v) -> RemoveItem(holder.getBindingAdapterPosition()));
     }
     @SuppressWarnings("unused")
     public void AddData(Uri uri) {
@@ -116,6 +120,16 @@ public class ContentUploadAdapter extends RecyclerView.Adapter<ContentUploadAdap
             notifyItemRangeInserted(ptr, added);
         }
     }
+    private void RemoveItem(int position) {
+        contents.remove(position);
+        if (contents.size() == maxContents - 1) {
+            notifyItemRemoved(position);
+            notifyItemInserted(maxContents - 1);
+        }
+        else {
+            notifyItemRemoved(position);
+        }
+    }
 
     @Override
     public int getItemCount() {
@@ -127,11 +141,13 @@ public class ContentUploadAdapter extends RecyclerView.Adapter<ContentUploadAdap
         View clickableLayout;
         ShapeableImageView preview;
         CircularProgressIndicator progressBar;
+        MaterialButton actionButton;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             name = itemView.findViewById(R.id.contentName);
             preview = itemView.findViewById(R.id.preview);
             progressBar = itemView.findViewById(R.id.progressBar);
+            actionButton = itemView.findViewById(R.id.actionButton);
 
             clickableLayout = itemView.findViewById(R.id.rowLayout);
         }

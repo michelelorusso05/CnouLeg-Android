@@ -28,15 +28,17 @@ import java.io.IOException;
 import java.net.URL;
 
 public class FragmentProfile extends Fragment {
+    public static final String TAG = FragmentProfile.class.getSimpleName();
     MaterialButton loginButton;
     MaterialButton registrationButton;
-    FloatingActionButton editProfile;
+    MaterialButton editProfile;
 
     View infoCard;
     View loginControlsCard;
 
-    MaterialTextView authorName, bio, birthdate, studyingAt;
+    MaterialTextView authorName, bio, birthdate, studyingAt, notesLabel;
     ShapeableImageView authorProfilePic;
+    Profile loadedProfile;
 
     public FragmentProfile() {}
 
@@ -64,7 +66,9 @@ public class FragmentProfile extends Fragment {
         loginButton = view.findViewById(R.id.loginButton);
         registrationButton = view.findViewById(R.id.registrationButton);
 
-        editProfile = view.findViewById(R.id.edit_profile_fab);
+        editProfile = view.findViewById(R.id.edit_profile_button);
+
+        notesLabel = view.findViewById(R.id.notesLabel);
 
         loginButton.setOnClickListener((v) -> {
             Intent i = new Intent(requireContext(), ActivityLogin.class);
@@ -78,7 +82,20 @@ public class FragmentProfile extends Fragment {
             startActivity(i);
         });
 
+        if (savedInstanceState == null)
+            savedInstanceState = getArguments();
+
+        if (savedInstanceState != null)
+            loadedProfile = SharedUtils.GetParcelable(savedInstanceState, "profile", Profile.class);
+
         return view;
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        if (loadedProfile != null)
+            outState.putParcelable("profile", loadedProfile);
     }
 
     @Override
@@ -90,22 +107,29 @@ public class FragmentProfile extends Fragment {
     public void onStart() {
         super.onStart();
 
-        String token = AccessTokenUtils.GetAccessToken(requireContext());
-
-        if (token != null && !token.isEmpty()) {
+        // Display mode, disable all edit options
+        if (loadedProfile != null) {
             infoCard.setVisibility(View.VISIBLE);
-            editProfile.setVisibility(View.VISIBLE);
             loginControlsCard.setVisibility(View.GONE);
-
-            GetUserInfo(AccessTokenUtils.GetMongoDBIDFromToken(token));
+            notesLabel.setVisibility(View.VISIBLE);
+            ApplyInfo(loadedProfile, false);
         }
         else {
-            infoCard.setVisibility(View.GONE);
-            editProfile.setVisibility(View.GONE);
-            loginControlsCard.setVisibility(View.VISIBLE);
+            String token = AccessTokenUtils.GetAccessToken(requireContext());
 
-            authorProfilePic.setImageResource(R.drawable.account_circle_24px);
-            authorName.setText(R.string.account_guest_name);
+            if (token != null && !token.isEmpty()) {
+                infoCard.setVisibility(View.VISIBLE);
+                loginControlsCard.setVisibility(View.GONE);
+                notesLabel.setVisibility(View.VISIBLE);
+                GetUserInfo(AccessTokenUtils.GetMongoDBIDFromToken(token));
+            }
+            else {
+                infoCard.setVisibility(View.GONE);
+                loginControlsCard.setVisibility(View.VISIBLE);
+                notesLabel.setVisibility(View.GONE);
+                authorProfilePic.setImageResource(R.drawable.account_circle_24px);
+                authorName.setText(R.string.account_guest_name);
+            }
         }
     }
 
@@ -124,58 +148,7 @@ public class FragmentProfile extends Fragment {
                 if (activity == null) return;
 
                 activity.runOnUiThread(() -> {
-                    authorName.setText(profile.getUsername());
-
-                    if (profile.getProfilePicURL() != null && !profile.getProfilePicURL().isEmpty()) {
-                        Glide
-                            .with(requireContext())
-                            .load(SharedUtils.GetServer(requireContext()) + "/profile_pics/" + profile.getProfilePicURL())
-                            .skipMemoryCache(true)
-                            .diskCacheStrategy(DiskCacheStrategy.NONE)
-                            .placeholder(R.drawable.account_circle_24px)
-                            .into(authorProfilePic)
-                        ;
-                    }
-
-                    if (profile.getBio() == null || profile.getBio().isEmpty())
-                        bio.setText(R.string.bio_not_set);
-                    else
-                        bio.setText(profile.getBio());
-
-                    birthdate.setText(requireContext().getString(R.string.profile_birthday, SharedUtils.FormatDateLocale(requireContext(), profile.getBirthdate())));
-
-                    if (profile.getRole() == null || profile.getRole().isEmpty() || "other".equals(profile.getRole())) {
-                        studyingAt.setVisibility(View.GONE);
-                    }
-                    else {
-                        studyingAt.setVisibility(View.VISIBLE);
-                        if ("student".equals(profile.getRole())) {
-                            if (profile.getSchool() != null && !profile.getSchool().isEmpty()) {
-                                if (profile.getSubject() != null && !profile.getSubject().isEmpty())
-                                    studyingAt.setText(getString(R.string.profile_studies, profile.getSubject(), profile.getSchool()));
-                                else
-                                    studyingAt.setText(getString(R.string.profile_studies_alt, profile.getSchool()));
-                            }
-                            else
-                                studyingAt.setText(R.string.profile_student);
-                        }
-                        else if ("teacher".equals(profile.getRole())) {
-                            if (profile.getSchool() != null && !profile.getSchool().isEmpty()) {
-                                if (profile.getSubject() != null && !profile.getSubject().isEmpty())
-                                    studyingAt.setText(getString(R.string.profile_teaches, profile.getSubject(), profile.getSchool()));
-                                else
-                                    studyingAt.setText(getString(R.string.profile_teaches_alt, profile.getSchool()));
-                            }
-                            else
-                                studyingAt.setText(R.string.profile_teacher);
-                        }
-                    }
-
-                    editProfile.setOnClickListener((v) -> {
-                        Intent i = new Intent(requireContext(), ActivityEditProfileDetails.class);
-                        i.putExtra("profileInfo", profile);
-                        startActivity(i);
-                    });
+                    ApplyInfo(profile, true);
                 });
 
             } catch (IOException e) {
@@ -183,5 +156,66 @@ public class FragmentProfile extends Fragment {
                         Snackbar.make(requireView(), R.string.error_unrecognized_token, Snackbar.LENGTH_SHORT).show());
             }
         }).start();
+    }
+
+    private void ApplyInfo(Profile profile, boolean self) {
+        authorName.setText(profile.getUsername());
+
+        if (profile.getProfilePicURL() != null && !profile.getProfilePicURL().isEmpty()) {
+            Glide
+                    .with(requireContext())
+                    .load(SharedUtils.GetServer(requireContext()) + "/profile_pics/" + profile.getProfilePicURL())
+                    .skipMemoryCache(true)
+                    .diskCacheStrategy(DiskCacheStrategy.NONE)
+                    .placeholder(R.drawable.account_circle_24px)
+                    .into(authorProfilePic)
+            ;
+        }
+
+        if (profile.getBio() == null || profile.getBio().isEmpty())
+            bio.setText(R.string.bio_not_set);
+        else
+            bio.setText(profile.getBio());
+
+        birthdate.setText(requireContext().getString(R.string.profile_birthday, SharedUtils.FormatDateLocale(requireContext(), profile.getBirthdate())));
+
+        if (profile.getRole() == null || profile.getRole().isEmpty() || "other".equals(profile.getRole())) {
+            studyingAt.setVisibility(View.GONE);
+        }
+        else {
+            studyingAt.setVisibility(View.VISIBLE);
+            if ("student".equals(profile.getRole())) {
+                if (profile.getSchool() != null && !profile.getSchool().isEmpty()) {
+                    if (profile.getSubject() != null && !profile.getSubject().isEmpty())
+                        studyingAt.setText(getString(R.string.profile_studies, profile.getSubject(), profile.getSchool()));
+                    else
+                        studyingAt.setText(getString(R.string.profile_studies_alt, profile.getSchool()));
+                }
+                else
+                    studyingAt.setText(R.string.profile_student);
+            }
+            else if ("teacher".equals(profile.getRole())) {
+                if (profile.getSchool() != null && !profile.getSchool().isEmpty()) {
+                    if (profile.getSubject() != null && !profile.getSubject().isEmpty())
+                        studyingAt.setText(getString(R.string.profile_teaches, profile.getSubject(), profile.getSchool()));
+                    else
+                        studyingAt.setText(getString(R.string.profile_teaches_alt, profile.getSchool()));
+                }
+                else
+                    studyingAt.setText(R.string.profile_teacher);
+            }
+        }
+
+        if (self) {
+            editProfile.setVisibility(View.VISIBLE);
+            editProfile.setOnClickListener((v) -> {
+                Intent i = new Intent(requireContext(), ActivityEditProfileDetails.class);
+                i.putExtra("profileInfo", profile);
+                startActivity(i);
+            });
+        }
+        else {
+            editProfile.setVisibility(View.GONE);
+        }
     }
 }

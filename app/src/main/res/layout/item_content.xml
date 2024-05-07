@@ -2,6 +2,7 @@
 
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="8dp"
@@ -20,11 +21,14 @@
         android:clickable="true"
         android:focusable="true"
         android:orientation="vertical"
-        android:padding="8dp">
+        android:clipToPadding="false">
 
         <FrameLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:clipToPadding="false"
+            android:paddingTop="8dp"
+            android:paddingHorizontal="8dp">
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/preview"
@@ -43,6 +47,19 @@
                 android:indeterminate="true"
                 android:visibility="gone"
                 app:trackCornerRadius="8dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/actionButton"
+                style="@style/Widget.Material3.Button.IconButton.Filled"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:icon="@drawable/delete_24px"
+                android:layout_gravity="right|top"
+                android:layout_marginTop="-8dp"
+                android:layout_marginRight="-8dp"
+                tools:ignore="RtlHardcoded"
+                android:visibility="gone"/>
+
         </FrameLayout>
 
         <TextView
@@ -50,9 +67,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
+            android:paddingBottom="8dp"
+            android:paddingHorizontal="8dp"
             android:ellipsize="middle"
             android:maxLines="1"
-            android:text="Immagine.jpg"
             android:textAlignment="center" />
 
     </LinearLayout>

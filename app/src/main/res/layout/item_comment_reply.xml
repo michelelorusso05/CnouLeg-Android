@@ -40,6 +40,7 @@
                     app:cardElevation="0dp">
 
                     <LinearLayout
+                        android:id="@+id/authorInfoButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="?attr/selectableItemBackground"
@@ -87,12 +88,13 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <Button
-                    style="?attr/materialIconButtonStyle"
+                <com.google.android.material.button.MaterialButton
+                    style="@style/Widget.Material3.Button.IconButton"
+                    android:id="@+id/thumbsUpButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/ripple_button_24"
                     android:padding="0dp"
+                    android:background="@drawable/ripple_button_24"
                     app:icon="@drawable/thumb_up_24px" />
 
                 <TextView
@@ -101,12 +103,13 @@
                     android:layout_height="wrap_content"
                     android:gravity="center" />
 
-                <Button
-                    style="?attr/materialIconButtonStyle"
+                <com.google.android.material.button.MaterialButton
+                    style="@style/Widget.Material3.Button.IconButton"
+                    android:id="@+id/thumbsDownButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/ripple_button_24"
                     android:padding="0dp"
+                    android:background="@drawable/ripple_button_24"
                     app:icon="@drawable/thumb_down_24px" />
 
                 <Button

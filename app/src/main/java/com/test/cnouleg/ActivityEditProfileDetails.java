@@ -74,7 +74,8 @@ public class ActivityEditProfileDetails extends AppCompatActivity {
                 // Cache image to file for future reload
                 try {
                     FileOutputStream out = new FileOutputStream(getCacheDir() + "/temp.jpeg");
-                    croppedImageResult.compress(Bitmap.CompressFormat.JPEG, 100, out);
+                    Bitmap.createScaledBitmap(croppedImageResult, 256, 256, true)
+                        .compress(Bitmap.CompressFormat.JPEG, 100, out);
 
                     out.flush();
                     out.close();

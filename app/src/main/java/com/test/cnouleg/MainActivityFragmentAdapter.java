@@ -17,7 +17,7 @@ public class MainActivityFragmentAdapter extends FragmentStateAdapter {
             case 0:
                 return new FragmentSearch();
             case 1:
-                return new FragmentProfile();
+                return new FragmentProfileWrapper();
         }
         throw new IllegalStateException("This ViewPager only has " + getItemCount() + " fragments");
     }

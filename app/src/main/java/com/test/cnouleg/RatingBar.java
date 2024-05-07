@@ -1,23 +1,22 @@
 package com.test.cnouleg;
 
-import android.content.Context;
-import android.graphics.drawable.StateListDrawable;
 import android.view.MotionEvent;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import androidx.annotation.DrawableRes;
-import androidx.appcompat.content.res.AppCompatResources;
+import androidx.annotation.NonNull;
 
 import com.google.android.material.button.MaterialButton;
+
+import java.util.function.Consumer;
 
 public class RatingBar {
     MaterialButton[] stars;
     private static final @DrawableRes int star_empty = R.drawable.star_empty_24px;
     private static final @DrawableRes int star = R.drawable.star_24px;
     private int currentRating;
-    public RatingBar(ViewGroup parentView) {
+    private Consumer<Integer> onRateChanged;
+    public RatingBar(@NonNull ViewGroup parentView) {
         currentRating = -1;
 
         stars = new MaterialButton[parentView.getChildCount()];
@@ -28,13 +27,23 @@ public class RatingBar {
             final int position = i;
 
             stars[i].setOnTouchListener((v, m) -> {
+                int p = position;
                 if (m.getAction() == MotionEvent.ACTION_UP) {
-                    currentRating = position;
+                    if (currentRating == position) {
+                        p = -1;
+                        currentRating = -1;
+                    }
+                    else
+                        currentRating = position;
+
+                    if (onRateChanged != null)
+                        onRateChanged.accept(currentRating + 1);
+
                     v.performClick();
                 }
 
                 for (int j = 0; j < stars.length; j++) {
-                    stars[j].setIconResource(j > (m.getAction() == MotionEvent.ACTION_CANCEL ? currentRating : position) ? star_empty : star);
+                    stars[j].setIconResource(j > (m.getAction() == MotionEvent.ACTION_CANCEL ? currentRating : p) ? star_empty : star);
                 }
 
                 return true;
@@ -48,6 +57,21 @@ public class RatingBar {
                 return true;
             });
 
+        }
+    }
+    public void setOnRateChangedListener(Consumer<Integer> c) {
+        onRateChanged = c;
+    }
+    public void setEnabled(boolean enabled) {
+        for (MaterialButton star : stars) {
+            star.setEnabled(enabled);
+        }
+    }
+
+    public void setRateAmount(int v) {
+        currentRating = v - 1;
+        for (int j = 0; j < stars.length; j++) {
+            stars[j].setIconResource(j > currentRating ? star_empty : star);
         }
     }
 }

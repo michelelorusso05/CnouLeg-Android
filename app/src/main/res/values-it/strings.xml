@@ -99,6 +99,7 @@
     <string name="settings_profile_logout_desc">Elimina il JWT salvato ed esci dall\'account.</string>
     <string name="bio_not_set">Nessuna descrizione impostata</string>
     <string name="activity_edit_profile_details">Profilo</string>
+    <string name="action_edit_profile_details">Modifica profilo</string>
     <string name="menu_choose_image">Scegli immagine</string>
     <string name="menu_remove_image">Rimuovi immagine</string>
 
@@ -154,4 +155,28 @@
     <string name="action_insert_table">Inserisci tabella</string>
     <string name="error_unrecognized_token">Il server non ha riconosciuto il JWT.</string>
     <string name="logout_successful">Logout effettuato</string>
+    <string name="form_role">Ruolo</string>
+    <string name="form_school">Scuola</string>
+    <string name="form_study_field">Campo di studi</string>
+    <string name="form_save">Salva</string>
+    <string name="editor_title">Titolo</string>
+    <string name="editor_description">Descrizione</string>
+    <string name="editor_class_level">Livello</string>
+    <string name="editor_subject">Materia</string>
+    <string name="editor_tags">Tag (max. 5)</string>
+    <string name="editor_markdown">Markdown</string>
+    <string name="editor_preview">Anteprima</string>
+    <string name="editor_max_10_elements">Massimo 10 elementi</string>
+    <string name="editor_max_5_elements">Massimo 5 elementi</string>
+    <string name="hint_log_in">Effettua l\'accesso per commentare.</string>
+    <string name="action_editor_done">Nascondi questa barra</string>
+    <string name="error_empty_title">Inserisci un titolo.</string>
+    <string name="error_empty_desc">Inserisci una descrizione.</string>
+    <string name="error_empty_subject">Scegli una materia.</string>
+    <string name="error_empty_class_level">Scegli un livello.</string>
+    <string name="error_empty_markdown">Inserisci un corpo.</string>
+    <string name="error_markdown_too_short">Allunga un po\' il brodo…</string>
+    <string name="label_login_to_rate">Accedi per valutare.</string>
+    <string name="label_must_be_logged_in">Effettua l\'accesso per farlo.</string>
+    <string name="profile_notes">Appunti condivisi</string>
 </resources>

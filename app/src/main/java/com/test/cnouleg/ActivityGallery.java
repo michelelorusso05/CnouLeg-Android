@@ -25,7 +25,7 @@ public class ActivityGallery extends FullscreenActivity {
         pager = findViewById(R.id.pager);
         pager.setSaveEnabled(false);
 
-        pager.setAdapter(new GalleryPagesAdapter(this, noteID, contents, (Runnable) () -> onTouch.accept(null)));
+        pager.setAdapter(new GalleryPagesAdapter(this, noteID, contents, () -> onTouch.accept(null)));
         pager.setCurrentItem(page, false);
         pager.setOffscreenPageLimit(1);
     }

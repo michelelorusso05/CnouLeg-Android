@@ -40,6 +40,7 @@ import com.test.cnouleg.api.Comment;
 import com.test.cnouleg.api.CommentResults;
 import com.test.cnouleg.api.InsertionResult;
 import com.test.cnouleg.api.Note;
+import com.test.cnouleg.api.Rating;
 import com.test.cnouleg.utils.AccessTokenUtils;
 import com.test.cnouleg.utils.SharedUtils;
 
@@ -356,14 +357,29 @@ public class ActivityReader extends AppCompatActivity {
     }
 
     private void BeginSearch() {
-        new Thread(() -> {
-            try {
-                String srv = SharedUtils.GetServer(ActivityReader.this);
-                CommentResults commentResults = StaticData.getMapper().readValue(new URL(srv + "/api/comments/?post_id=" + loadedNote.getId()), CommentResults.class);
+        String token = AccessTokenUtils.GetAccessToken(this);
+        String srv = SharedUtils.GetServer(this);
+
+        Request.Builder builder = new Request.Builder()
+                .url(srv + "/api/comments/?post_id=" + loadedNote.getId())
+                .get();
+
+        if (token != null)
+            builder.header("authorization", "Bearer " + token);
+
+        StaticData.getClient().newCall(builder.build()).enqueue(new Callback() {
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+
+            }
+
+            @Override
+            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                if (response.code() != 200) return;
+
+                CommentResults commentResults = StaticData.getMapper().readValue(response.body().bytes(), CommentResults.class);
 
                 StringBuilder b = new StringBuilder(srv + "/api/users/?");
-
-                String token = AccessTokenUtils.GetAccessToken(ActivityReader.this);
 
                 if (token != null && !token.isEmpty())
                     // Add self
@@ -383,10 +399,8 @@ public class ActivityReader extends AppCompatActivity {
 
                 runOnUiThread(() ->
                         commentAdapter.addComments(Arrays.asList(commentResults.getComments()), authorMapping));
-            } catch (IOException e) {
-               throw new RuntimeException(e);
             }
-        }).start();
+        });
     }
 
     @SuppressWarnings("deprecation")
