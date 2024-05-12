@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/editNote"
+        android:title="@string/menu_edit_note" />
+
+    <item
+        android:id="@+id/deleteNote"
+        android:title="@string/menu_delete_note" />
+</menu>

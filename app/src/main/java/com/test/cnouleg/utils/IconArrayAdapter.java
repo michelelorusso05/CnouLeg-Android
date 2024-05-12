@@ -12,52 +12,64 @@ import android.widget.Filterable;
 import android.widget.TextView;
 
 import androidx.annotation.ArrayRes;
+import androidx.annotation.DrawableRes;
 
 import com.test.cnouleg.R;
+
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
 
 public class IconArrayAdapter extends BaseAdapter implements Filterable {
     Context context;
     LayoutInflater inflater;
-    String[] ids;
-    String[] labels;
-    Drawable[] icons;
-    public IconArrayAdapter(Context ctx, @ArrayRes int idsRes, @ArrayRes int labelsRes, @ArrayRes int iconsRes) {
-        context = ctx;
-        ids = context.getResources().getStringArray(idsRes);
-        labels = context.getResources().getStringArray(labelsRes);
+    List<String> ids;
+    List<String> labels;
+    List<Drawable> icons;
+    public static IconArrayAdapter createFromRes(Context ctx, @ArrayRes int idsRes, @ArrayRes int labelsRes, @ArrayRes int iconsRes) {
+        String[] ids = ctx.getResources().getStringArray(idsRes);
+        String[] idVals = ctx.getResources().getStringArray(labelsRes);
 
-        if (ids.length != labels.length)
-            throw new IllegalArgumentException("IDs array and labels array must be of the same length");
+        TypedArray iconsArray = ctx.getResources().obtainTypedArray(iconsRes);
+        Drawable[] iconsTemp = new Drawable[ids.length];
 
-        icons = new Drawable[ids.length];
-
-        TypedArray imgs = context.getResources().obtainTypedArray(iconsRes);
-
-        for (int i = 0; i < icons.length; i++) {
-            icons[i] = imgs.getDrawable(i);
+        for (int i = 0; i < iconsTemp.length; i++) {
+            iconsTemp[i] = iconsArray.getDrawable(i);
         }
 
-        imgs.recycle();
+        iconsArray.recycle();
+
+        return new IconArrayAdapter(ctx, Arrays.asList(ids), Arrays.asList(idVals), Arrays.asList(iconsTemp));
+    }
+    public IconArrayAdapter(Context ctx, List<String> idsRes, List<String> labelsRes, List<Drawable> iconsRes) {
+        context = ctx;
+        ids = idsRes;
+        labels = labelsRes;
+
+        if (ids.size() != labels.size())
+            throw new IllegalArgumentException("IDs array and labels array must be of the same length");
+
+        icons = iconsRes;
 
         inflater = LayoutInflater.from(context);
     }
     @Override
     public int getCount() {
-        return ids.length;
+        return ids.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return labels[position];
+        return labels.get(position);
     }
 
     public String getItemValue(int position) {
-        return ids[position];
+        return ids.get(position);
     }
 
     @Override
     public long getItemId(int position) {
-        return ids[position].hashCode();
+        return ids.get(position).hashCode();
     }
 
     @Override
@@ -67,8 +79,8 @@ public class IconArrayAdapter extends BaseAdapter implements Filterable {
 
         TextView textView = convertView.findViewById(android.R.id.text1);
 
-        textView.setText(labels[position]);
-        textView.setCompoundDrawablesRelativeWithIntrinsicBounds(icons[position], null, null, null);
+        textView.setText(labels.get(position));
+        textView.setCompoundDrawablesRelativeWithIntrinsicBounds(icons.get(position), null, null, null);
 
         return convertView;
     }

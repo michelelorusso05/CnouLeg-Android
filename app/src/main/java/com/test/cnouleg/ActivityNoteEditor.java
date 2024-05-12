@@ -111,6 +111,7 @@ public class ActivityNoteEditor extends AppCompatActivity {
     Timer delayedUpdate;
     long lastUpdate;
     boolean shouldUpdate;
+    String id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -162,7 +163,7 @@ public class ActivityNoteEditor extends AppCompatActivity {
 
         subjectLayout = findViewById(R.id.subject_text_field);
         subjectEditText = findViewById(R.id.subjectEditText);
-        subjectEditText.setAdapter(new IconArrayAdapter(this, R.array.subject_values, R.array.subject_strings, R.array.subjects_icons));
+        subjectEditText.setAdapter(IconArrayAdapter.createFromRes(this, R.array.subject_values, R.array.subject_strings, R.array.subjects_icons));
         subjectEditText.setOnFocusChangeListener((v, hasFocus) -> {
             if (hasFocus) HideKeyboard(v);
         });
@@ -192,14 +193,15 @@ public class ActivityNoteEditor extends AppCompatActivity {
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (s.chars().anyMatch(value -> Character.isWhitespace((char) value) || value == ','))
+                if (s.chars().anyMatch(value -> value == '\n' || value == '\t' || value == ',')) {
                     tagsInserted = true;
+                }
             }
             @Override
             public void afterTextChanged(Editable s) {
                 if (tagsInserted) {
                     tagsInserted = false;
-                    String[] tagParts = s.toString().split("[\\s,]+");
+                    String[] tagParts = s.toString().split("[\n\t,]+");
                     for (String tag : tagParts) {
                         if (tags.getChildCount() >= 5) break;
 
@@ -209,6 +211,7 @@ public class ActivityNoteEditor extends AppCompatActivity {
                         tagView.setOnClickListener((v) -> tags.removeView(tagView));
                         tags.addView(tagView);
                     }
+
                     s.clear();
                 }
             }
@@ -502,15 +505,19 @@ public class ActivityNoteEditor extends AppCompatActivity {
         });
 
         // Restore state
+        if (savedInstanceState == null) {
+            savedInstanceState = getIntent().getExtras();
+        }
         if (savedInstanceState == null)
             return;
 
+        id = savedInstanceState.getString("id", null);
         title.setText(savedInstanceState.getString("title", ""));
         description.setText(savedInstanceState.getString("description", ""));
         subject = savedInstanceState.getString("subject");
         subjectEditText.setText(SharedUtils.GetMatchingString(this, R.array.subject_values, R.array.subject_strings, subject), false);
         school = savedInstanceState.getString("classLevel");
-        schoolEditText.setText(SharedUtils.GetMatchingString(this, R.array.class_level_values, R.array.class_level_strings, subject), false);
+        schoolEditText.setText(SharedUtils.GetMatchingString(this, R.array.class_level_values, R.array.class_level_strings, school), false);
 
         String[] tagsArr = savedInstanceState.getStringArray("tags");
         if (tagsArr == null)
@@ -528,12 +535,21 @@ public class ActivityNoteEditor extends AppCompatActivity {
 
         markdownEditText.setText(savedInstanceState.getString("markdown", ""));
 
-        ArrayList<Uri> savedImages = SharedUtils.GetParcelableArrayList(savedInstanceState, "images", Uri.class);
-        addedImagesAdapter.AddData(savedImages);
-        ArrayList<Uri> savedVideos = SharedUtils.GetParcelableArrayList(savedInstanceState, "videos", Uri.class);
-        addedVideosAdapter.AddData(savedVideos);
-        ArrayList<Uri> savedDocuments = SharedUtils.GetParcelableArrayList(savedInstanceState, "documents", Uri.class);
-        addedDocumentsAdapter.AddData(savedDocuments);
+        if (id == null) {
+            ArrayList<Uri> savedImages = SharedUtils.GetParcelableArrayList(savedInstanceState, "images", Uri.class);
+            addedImagesAdapter.AddData(savedImages);
+            ArrayList<Uri> savedVideos = SharedUtils.GetParcelableArrayList(savedInstanceState, "videos", Uri.class);
+            addedVideosAdapter.AddData(savedVideos);
+            ArrayList<Uri> savedDocuments = SharedUtils.GetParcelableArrayList(savedInstanceState, "documents", Uri.class);
+            addedDocumentsAdapter.AddData(savedDocuments);
+        }
+        else {
+            findViewById(R.id.imagesContainer).setVisibility(View.GONE);
+            findViewById(R.id.videosContainer).setVisibility(View.GONE);
+            findViewById(R.id.documentsContainer).setVisibility(View.GONE);
+            findViewById(R.id.editNoteInfo).setVisibility(View.VISIBLE);
+        }
+
     }
 
     @Override
@@ -548,6 +564,7 @@ public class ActivityNoteEditor extends AppCompatActivity {
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
+        outState.putString("id", id);
         outState.putString("title", title.getText().toString());
         outState.putString("description", description.getText().toString());
         outState.putString("subject", subject);
@@ -775,7 +792,7 @@ public class ActivityNoteEditor extends AppCompatActivity {
 
         AutoCompleteTextView languageEditText = layout.findViewById(R.id.language_edittext);
 
-        IconArrayAdapter adapter = new IconArrayAdapter(this, R.array.programming_languages_values, R.array.programming_languages, R.array.programming_languages_drawables);
+        IconArrayAdapter adapter = IconArrayAdapter.createFromRes(this, R.array.programming_languages_values, R.array.programming_languages, R.array.programming_languages_drawables);
         languageEditText.setAdapter(adapter);
         languageEditText.setText((String) adapter.getItem(0), false);
         languageEditText.setOnItemClickListener((parent, view, position, id) ->
@@ -921,27 +938,36 @@ public class ActivityNoteEditor extends AppCompatActivity {
             requestBodyBuilder.addFormDataPart("tags", ((Chip) tags.getChildAt(i)).getText().toString());
         }
 
-        for (Uri uri : addedImagesAdapter.contents) {
-            requestBodyBuilder.addFormDataPart("images", SharedUtils.GetFilenameFromURI(this, uri),
-                    new InputStreamRequestBody(getContentResolver(), uri));
-        }
+        if (id == null) {
+            for (Uri uri : addedImagesAdapter.contents) {
+                requestBodyBuilder.addFormDataPart("images", SharedUtils.GetFilenameFromURI(this, uri),
+                        new InputStreamRequestBody(getContentResolver(), uri));
+            }
 
-        for (Uri uri : addedVideosAdapter.contents) {
-            requestBodyBuilder.addFormDataPart("videos", SharedUtils.GetFilenameFromURI(this, uri),
-                    new InputStreamRequestBody(getContentResolver(), uri));
-        }
+            for (Uri uri : addedVideosAdapter.contents) {
+                requestBodyBuilder.addFormDataPart("videos", SharedUtils.GetFilenameFromURI(this, uri),
+                        new InputStreamRequestBody(getContentResolver(), uri));
+            }
 
-        for (Uri uri : addedDocumentsAdapter.contents) {
-            requestBodyBuilder.addFormDataPart("documents", SharedUtils.GetFilenameFromURI(this, uri),
-                    new InputStreamRequestBody(getContentResolver(), uri));
+            for (Uri uri : addedDocumentsAdapter.contents) {
+                requestBodyBuilder.addFormDataPart("documents", SharedUtils.GetFilenameFromURI(this, uri),
+                        new InputStreamRequestBody(getContentResolver(), uri));
+            }
+        }
+        else {
+            requestBodyBuilder.addFormDataPart("note_id", id);
         }
 
         String token = AccessTokenUtils.GetAccessToken(this);
 
         Request.Builder builder = new Request.Builder()
                 .url(SharedUtils.GetServer(this) + "/api/notes/")
-                .header("authorization", "Bearer " + token)
-                .post(requestBodyBuilder.build());
+                .header("authorization", "Bearer " + token);
+
+        if (id == null)
+            builder.post(requestBodyBuilder.build());
+        else
+            builder.put(requestBodyBuilder.build());
 
         progressBar.setVisibility(View.VISIBLE);
         sendFab.setEnabled(false);
@@ -958,7 +984,10 @@ public class ActivityNoteEditor extends AppCompatActivity {
 
             @Override
             public void onResponse(@NonNull Call call, @NonNull Response response) {
-                if (response.code() == 401) {
+                int status = response.code();
+                response.body().close();
+
+                if (status == 401) {
                     runOnUiThread(() -> Snackbar.make(sendFab, R.string.error_authentication_error, Snackbar.LENGTH_SHORT).show());
                 }
                 else {

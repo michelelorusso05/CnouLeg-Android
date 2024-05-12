@@ -24,7 +24,18 @@
             android:name=".ActivityViewProfileDetails"
             android:label="@string/activity_edit_profile_details"
             android:parentActivityName=".ActivityReader"
-            android:exported="false" />
+            android:exported="true">
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="https" />
+                <data android:host="cnouleg.web.app" />
+                <data android:pathPrefix="/user/" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".ActivityNoteEditor"
             android:exported="false"
@@ -71,7 +82,8 @@
         <activity
             android:name=".ActivityMain"
             android:exported="true"
-            android:theme="@style/Theme.CnouLeg.StyledNavigationBar">
+            android:theme="@style/Theme.CnouLeg.StyledNavigationBar"
+            android:windowSoftInputMode="adjustNothing">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -82,7 +94,18 @@
             android:name=".ActivityReader"
             android:exported="true"
             android:label="@string/activity_read"
-            android:parentActivityName=".ActivityMain" />
+            android:parentActivityName=".ActivityMain">
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="https" />
+                <data android:host="cnouleg.web.app" />
+                <data android:pathPrefix="/note/" />
+            </intent-filter>
+        </activity>
 
         <provider
             android:name="androidx.core.content.FileProvider"

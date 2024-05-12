@@ -169,6 +169,8 @@ public class StepperRegistration1 extends StepperFragment {
 
                     @Override
                     public void onResponse(@NonNull Call call, @NonNull Response response) {
+                        response.body().close();
+
                         requireActivity().runOnUiThread(() ->
                                 registrationFormViewModel.UpdateSecondStep(f_birthdate, f_gender));
                     }

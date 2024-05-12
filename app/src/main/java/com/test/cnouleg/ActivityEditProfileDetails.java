@@ -64,9 +64,11 @@ public class ActivityEditProfileDetails extends AppCompatActivity {
 
     Profile profile;
     Bitmap croppedImageResult;
+    boolean hasDeletedImage;
 
     ActivityResultLauncher<CropImageContractOptions> cropImage = registerForActivityResult(new CropImageContract(), result -> {
         if (result.isSuccessful()) {
+            hasDeletedImage = false;
             croppedImageResult = result.getBitmap(ActivityEditProfileDetails.this);
             profilePic.setImageBitmap(croppedImageResult);
 
@@ -147,6 +149,7 @@ public class ActivityEditProfileDetails extends AppCompatActivity {
                 else if (menuItem.getItemId() == R.id.removeImage) {
                     croppedImageResult = null;
                     profilePic.setImageResource(R.drawable.account_circle_24px);
+                    hasDeletedImage = true;
                 }
 
                 return true;
@@ -267,6 +270,10 @@ public class ActivityEditProfileDetails extends AppCompatActivity {
                         .addFormDataPart("avatar", "avatar.jpg", profilePicBody)
                         .build();
                 }
+                else if (hasDeletedImage) {
+                    requestBodyBuilder
+                        .addFormDataPart("pic_deleted", "true");
+                }
 
                 String token = AccessTokenUtils.GetAccessToken(this);
 
@@ -288,7 +295,9 @@ public class ActivityEditProfileDetails extends AppCompatActivity {
 
                     @Override
                     public void onResponse(@NonNull Call call, @NonNull Response response) {
-                        if (response.code() == 401) {
+                        int status = response.code();
+                        response.body().close();
+                        if (status == 401) {
                             runOnUiThread(() -> Snackbar.make(nextButton, R.string.error_authentication_error, Snackbar.LENGTH_SHORT).show());
                         }
                         else {
@@ -323,6 +332,7 @@ public class ActivityEditProfileDetails extends AppCompatActivity {
 
         outState.putParcelable("profileInfo", profile);
         outState.putBoolean("hasEditedImage", croppedImageResult != null);
+        outState.putBoolean("hasDeletedImage", hasDeletedImage);
     }
 
     @Override

@@ -127,14 +127,17 @@ public class ActivityLogin extends AppCompatActivity {
                     @Override
                     public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
                         if (response.code() == 404) {
+                            response.body().close();
                             runOnUiThread(() -> emailEditText.setError(getString(R.string.error_no_user_found_with_email)));
                         }
                         else if (response.code() == 401) {
+                            response.body().close();
                             runOnUiThread(() -> passwordEditText.setError(getString(R.string.error_wrong_password)));
                         }
                         else {
                             String body = response.body().string();
                             String token = StaticData.getMapper().readValue(body, LoginResult.class).getToken();
+                            response.body().close();
 
                             AccessTokenUtils.SaveToken(ActivityLogin.this, token);
 

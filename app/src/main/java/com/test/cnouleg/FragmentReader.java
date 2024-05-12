@@ -4,6 +4,7 @@ import static android.content.Context.DOWNLOAD_SERVICE;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.DownloadManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -35,6 +36,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestBuilder;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
@@ -226,6 +228,8 @@ public class FragmentReader extends Fragment {
             Glide
                 .with(this)
                 .load(SharedUtils.GetServer(context) + "/profile_pics/" + author.getProfilePicURL())
+                // .skipMemoryCache(true)
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .placeholder(R.drawable.account_circle_24px)
                 .into(authorProfilePic)
             ;
@@ -362,10 +366,13 @@ public class FragmentReader extends Fragment {
             @Override
             public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
                 if (response.code() == 404) {
-                    requireActivity().runOnUiThread(() -> {
-                        ratingBar.setEnabled(true);
-                        ratingBar.setRateAmount(0);
-                    });
+                    Activity a = getActivity();
+                    if (a != null) {
+                        a.runOnUiThread(() -> {
+                            ratingBar.setEnabled(true);
+                            ratingBar.setRateAmount(0);
+                        });
+                    }
 
                     response.body().close();
                     return;
@@ -378,10 +385,13 @@ public class FragmentReader extends Fragment {
                 Rating rating = StaticData.getMapper().readValue(response.body().bytes(), Rating.class);
                 response.body().close();
 
-                requireActivity().runOnUiThread(() -> {
-                    ratingBar.setEnabled(true);
-                    ratingBar.setRateAmount((int) rating.getRating());
-                });
+                Activity a = getActivity();
+                if (a != null) {
+                    a.runOnUiThread(() -> {
+                        ratingBar.setEnabled(true);
+                        ratingBar.setRateAmount((int) rating.getRating());
+                    });
+                }
             }
         });
     }
@@ -417,9 +427,13 @@ public class FragmentReader extends Fragment {
 
             @Override
             public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
-                if (response.code() != 200) return;
+                if (response.code() != 200) {
+                    response.body().close();
+                    return;
+                }
 
                 RatingUpdateResult rating = StaticData.getMapper().readValue(response.body().bytes(), RatingUpdateResult.class);
+                response.body().close();
 
                 requireActivity().runOnUiThread(() -> {
                     loadedNote.setAverageRating(rating.getRating());

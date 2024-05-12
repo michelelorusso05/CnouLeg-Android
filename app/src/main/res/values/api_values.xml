@@ -23,6 +23,10 @@
         <item>biology</item>
         <item>economy</item>
         <item>law</item>
+        <item>art</item>
+        <item>music</item>
+        <item>philosophy</item>
+        <item>pe</item>
         <item>other</item>
     </string-array>
 
@@ -41,6 +45,10 @@
         <item>@drawable/biology_24px</item>
         <item>@drawable/economy_24px</item>
         <item>@drawable/law_24px</item>
+        <item>@drawable/brush_24px</item>
+        <item>@drawable/music_note_24px</item>
+        <item>@drawable/philosophy_24px</item>
+        <item>@drawable/steps_24px</item>
         <item>@drawable/other_24px</item>
     </integer-array>
 </resources>

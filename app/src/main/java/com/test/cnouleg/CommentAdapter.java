@@ -15,6 +15,7 @@ import androidx.core.util.Consumer;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
@@ -221,9 +222,14 @@ public class CommentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 Glide
                     .with(context)
                     .load(server + "/profile_pics/" + author.getProfilePicURL())
+                    // .skipMemoryCache(true)
+                    .diskCacheStrategy(DiskCacheStrategy.NONE)
                     .placeholder(R.drawable.account_circle_24px)
                     .into(commentHolder.authorProfilePic)
                 ;
+            }
+            else {
+                commentHolder.authorProfilePic.setImageResource(R.drawable.account_circle_24px);
             }
 
             commentHolder.likeButton.setIconResource(
@@ -353,7 +359,10 @@ public class CommentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
             @Override
             public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
-                if (response.code() != 200) return;
+                if (response.code() != 200) {
+                    response.body().close();
+                    return;
+                }
 
                 CommentResults commentResults = StaticData.getMapper().readValue(response.body().bytes(), CommentResults.class);
 

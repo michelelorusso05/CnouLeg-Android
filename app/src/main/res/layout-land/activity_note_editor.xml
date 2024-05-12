@@ -106,7 +106,7 @@
                         style="@style/Widget.Material3.AutoCompleteTextView.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="text|textCapWords|textAutoCorrect|textMultiLine" />
+                        android:inputType="text|textCapSentences|textAutoCorrect|textMultiLine" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <Space
@@ -343,6 +343,33 @@
 
             </androidx.cardview.widget.CardView>
 
+            <androidx.cardview.widget.CardView
+                android:id="@+id/editNoteInfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:cardBackgroundColor="?attr/cardBgColor"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="0dp"
+                android:visibility="gone">
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/varela"
+                        android:text="@string/edit_contents_info"
+                        android:gravity="center_vertical"
+                        app:drawableStartCompat="@drawable/info_24px"
+                        android:drawablePadding="8dp"/>
+                </FrameLayout>
+
+            </androidx.cardview.widget.CardView>
         </LinearLayout>
     </ScrollView>
 

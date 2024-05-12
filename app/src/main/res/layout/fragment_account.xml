@@ -102,7 +102,7 @@
                 app:drawableStartCompat="@drawable/school_24px" />
 
             <com.google.android.material.button.MaterialButton
-                style="@style/Widget.Material3.Button.IconButton.Filled"
+                style="@style/Widget.Material3.Button.IconButton.Filled.Tonal"
                 android:id="@+id/edit_profile_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

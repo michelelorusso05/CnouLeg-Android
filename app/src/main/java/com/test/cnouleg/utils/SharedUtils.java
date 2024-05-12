@@ -103,6 +103,9 @@ public class SharedUtils {
     }
 
     public static String GetMatchingString(Context context, @ArrayRes int srcArrRes, @ArrayRes int dstArrRes, String element) {
+        if (element == null)
+            return "";
+
         String[] srcArr = context.getResources().getStringArray(srcArrRes);
         String[] dstArr = context.getResources().getStringArray(dstArrRes);
 

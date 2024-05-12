@@ -12,6 +12,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.test.cnouleg.api.NotesResults;
 import com.test.cnouleg.api.Profile;
 import com.test.cnouleg.api.ProfileResults;
@@ -29,6 +30,7 @@ public class FragmentProfileWrapper extends Fragment {
     SearchAdapter searchAdapter;
     FragmentProfile profileFragment;
     Profile loadedProfile;
+    String loadedProfileId;
 
     public FragmentProfileWrapper() {}
 
@@ -40,13 +42,19 @@ public class FragmentProfileWrapper extends Fragment {
         if (savedInstanceState == null)
             savedInstanceState = getArguments();
 
-        if (savedInstanceState != null)
+        if (savedInstanceState != null) {
             loadedProfile = SharedUtils.GetParcelable(savedInstanceState, "profile", Profile.class);
+            loadedProfileId = savedInstanceState.getString("profileID", null);
+        }
 
         profileFragment = new FragmentProfile();
-        if (loadedProfile != null) {
+        if (loadedProfile != null || loadedProfileId != null) {
             Bundle bundle = new Bundle();
-            bundle.putParcelable("profile", loadedProfile);
+
+            if (loadedProfile != null)
+                bundle.putParcelable("profile", loadedProfile);
+
+            bundle.putString("profileID", loadedProfileId);
             profileFragment.setArguments(bundle);
         }
     }
@@ -56,6 +64,7 @@ public class FragmentProfileWrapper extends Fragment {
         super.onSaveInstanceState(outState);
         if (loadedProfile != null)
             outState.putParcelable("profile", loadedProfile);
+        outState.putString("profileID", loadedProfileId);
     }
 
     @Override
@@ -74,7 +83,7 @@ public class FragmentProfileWrapper extends Fragment {
 
                 } else {
                     fragmentManager.beginTransaction()
-                            .replace(viewID, profileFragment, FragmentReader.TAG)
+                            .replace(viewID, profileFragment, FragmentProfile.TAG)
                             .commit();
                 }
             } catch (Exception e) {
@@ -97,6 +106,11 @@ public class FragmentProfileWrapper extends Fragment {
         String id;
         if (loadedProfile != null) {
             id = loadedProfile.getId();
+            searchAdapter.setAllowEdit(false);
+        }
+        else if (loadedProfileId != null) {
+            id = loadedProfileId;
+            searchAdapter.setAllowEdit(false);
         }
         else {
             String token = AccessTokenUtils.GetAccessToken(context);
@@ -105,6 +119,7 @@ public class FragmentProfileWrapper extends Fragment {
                 return;
             }
             id = AccessTokenUtils.GetMongoDBIDFromToken(token);
+            searchAdapter.setAllowEdit(true);
         }
 
         new Thread(() -> {
@@ -129,9 +144,7 @@ public class FragmentProfileWrapper extends Fragment {
                 context.runOnUiThread(() -> {
                     searchAdapter.ReplaceNotes(Arrays.asList(notesResults.getNotes()), authorMapping);
                 });
-            } catch (IOException e) {
-                // context.runOnUiThread(() -> {});
-            }
+            } catch (Exception ignored) {}
         }).start();
     }
 }

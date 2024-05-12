@@ -142,6 +142,8 @@ public class StepperRegistration0 extends StepperFragment {
                     @Override
                     public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
                         boolean exists = StaticData.getMapper().readValue(response.body().bytes(), EmailValidationResult.class).exists();
+                        response.body().close();
+
                         requireActivity().runOnUiThread(() -> {
                             if (!exists)
                                 registrationFormViewModel.UpdateFirstStep(email, username, password);

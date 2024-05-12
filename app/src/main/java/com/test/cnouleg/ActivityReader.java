@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
@@ -34,6 +35,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.google.android.material.color.DynamicColors;
 import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.textfield.TextInputLayout;
+import com.test.cnouleg.api.NotesResults;
 import com.test.cnouleg.api.Profile;
 import com.test.cnouleg.api.ProfileResults;
 import com.test.cnouleg.api.Comment;
@@ -48,6 +50,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -74,7 +77,6 @@ public class ActivityReader extends AppCompatActivity {
 
     CommentAdapter commentAdapter;
 
-    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,16 +85,50 @@ public class ActivityReader extends AppCompatActivity {
         if (savedInstanceState == null)
             savedInstanceState = getIntent().getExtras();
 
-        assert savedInstanceState != null;
+        if (savedInstanceState != null && savedInstanceState.containsKey("note")) {
+            loadedNote = SharedUtils.GetParcelable(savedInstanceState, "note", Note.class);
+            author = SharedUtils.GetParcelable(savedInstanceState, "author", Profile.class);
 
-        loadedNote = SharedUtils.GetParcelable(savedInstanceState, "note", Note.class);
-        author = SharedUtils.GetParcelable(savedInstanceState, "author", Profile.class);
+            Init(loadedNote, author);
+            return;
+        }
 
-        assert loadedNote != null;
+        Uri data = getIntent().getData();
 
+        if (data == null)
+            throw new IllegalArgumentException("Must provide either a Profile through extras or a ID through data.");
+
+        List<String> linkParts = data.getPathSegments();
+        String id = linkParts.get(linkParts.size() - 1);
+
+        RetrieveInfo(id);
+    }
+
+    private void RetrieveInfo(String noteID) {
+        new Thread(() -> {
+            try {
+                String srv = SharedUtils.GetServer(ActivityReader.this);
+
+                String notesQuery = srv + "/api/note/?include_id[]=" + noteID;
+                NotesResults notesResults = StaticData.getMapper().readValue(new URL(notesQuery), NotesResults.class);
+
+                String usersQuery = srv + "/api/user/?include_id[]=" + notesResults.getNotes()[0].getAuthorID();
+                ProfileResults authorResults = StaticData.getMapper().readValue(usersQuery, ProfileResults.class);
+
+                runOnUiThread(() -> {
+                    loadedNote = notesResults.getNotes()[0];
+                    author = authorResults.getUsers()[0];
+                    Init(loadedNote, author);
+                });
+            } catch (IOException ignored) {}
+        }).start();
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
+    private void Init(Note note, Profile profile) {
         Bundle extras = new Bundle();
-        extras.putParcelable("note", loadedNote);
-        extras.putParcelable("author", author);
+        extras.putParcelable("note", note);
+        extras.putParcelable("author", profile);
 
         fragmentReader = new FragmentReader();
         fragmentReader.setArguments(extras);
@@ -178,8 +214,9 @@ public class ActivityReader extends AppCompatActivity {
         View touchBlock = findViewById(R.id.touchIntercept);
 
         View.OnTouchListener onTouchListener = (view, m) -> {
-            if (m.getAction() == MotionEvent.ACTION_UP)
+            if (m.getAction() == MotionEvent.ACTION_UP) {
                 commentField.clearFocus();
+            }
             return true;
         };
 
@@ -325,14 +362,16 @@ public class ActivityReader extends AppCompatActivity {
                             ProfileResults.class).getUsers()[0];
 
                     runOnUiThread(() ->
-                        Glide
-                            .with(ActivityReader.this)
-                            .load(SharedUtils.GetServer(this) + "/profile_pics/" + profile.getProfilePicURL())
-                            .skipMemoryCache(true)
-                            .diskCacheStrategy(DiskCacheStrategy.NONE)
-                            .placeholder(R.drawable.account_circle_24px)
-                            .into(commentProfilePic));
-                } catch (IOException e) {
+                            Glide
+                                .with(ActivityReader.this)
+                                .load(SharedUtils.GetServer(this) + "/profile_pics/" + profile.getProfilePicURL())
+                                .skipMemoryCache(true)
+                                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                                .placeholder(R.drawable.account_circle_24px)
+                                .into(commentProfilePic));
+                }
+                catch (IllegalArgumentException ignored) {}
+                catch (IOException e) {
                     throw new RuntimeException(e);
                 }
             }).start();
@@ -375,9 +414,13 @@ public class ActivityReader extends AppCompatActivity {
 
             @Override
             public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
-                if (response.code() != 200) return;
+                if (response.code() != 200) {
+                    response.body().close();
+                    return;
+                }
 
                 CommentResults commentResults = StaticData.getMapper().readValue(response.body().bytes(), CommentResults.class);
+                response.body().close();
 
                 StringBuilder b = new StringBuilder(srv + "/api/users/?");
 
@@ -452,6 +495,7 @@ public class ActivityReader extends AppCompatActivity {
             @Override
             public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
                 InsertionResult inserted = StaticData.getMapper().readValue(response.body().bytes(), InsertionResult.class);
+                response.body().close();
 
                 runOnUiThread(() -> {
                     Comment c = new Comment();

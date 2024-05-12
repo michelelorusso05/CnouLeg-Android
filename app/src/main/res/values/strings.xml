@@ -28,6 +28,10 @@
         <item>Biology</item>
         <item>Economy</item>
         <item>Law</item>
+        <item>Arts</item>
+        <item>Music</item>
+        <item>Philosophy</item>
+        <item>P. E.</item>
         <item>Other</item>
     </string-array>
     <string name="activity_read">Read a note</string>
@@ -199,7 +203,19 @@
     <string name="error_markdown_too_short">Write some more, will you?</string>
     <string name="label_login_to_rate">Log in to leave a rating.</string>
     <string name="label_must_be_logged_in">Log in to do that.</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="profile_notes">Shared notes</string>
+    <string name="hint_search_bar">Search</string>
+    <string name="label_min_rating">Minimum rating</string>
+
+    <plurals name="stars">
+        <item quantity="one">%d star</item>
+        <item quantity="other">%d stars</item>
+    </plurals>
+    <string name="ratings_any">Any</string>
+    <string name="dialog_search_filters">Search filters</string>
+    <string name="dialog_apply">Apply</string>
+    <string name="menu_edit_note">Edit note</string>
+    <string name="menu_delete_note">Delete note</string>
+    <string name="edit_contents_info">Attached contents can\'t be edited once a note is published.</string>
 
 </resources>

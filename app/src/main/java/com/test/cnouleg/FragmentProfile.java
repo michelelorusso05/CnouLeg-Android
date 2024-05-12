@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.snackbar.Snackbar;
@@ -39,6 +40,7 @@ public class FragmentProfile extends Fragment {
     MaterialTextView authorName, bio, birthdate, studyingAt, notesLabel;
     ShapeableImageView authorProfilePic;
     Profile loadedProfile;
+    String loadedProfileId;
 
     public FragmentProfile() {}
 
@@ -85,8 +87,10 @@ public class FragmentProfile extends Fragment {
         if (savedInstanceState == null)
             savedInstanceState = getArguments();
 
-        if (savedInstanceState != null)
+        if (savedInstanceState != null) {
             loadedProfile = SharedUtils.GetParcelable(savedInstanceState, "profile", Profile.class);
+            loadedProfileId = savedInstanceState.getString("profileID", null);
+        }
 
         return view;
     }
@@ -96,6 +100,8 @@ public class FragmentProfile extends Fragment {
         super.onSaveInstanceState(outState);
         if (loadedProfile != null)
             outState.putParcelable("profile", loadedProfile);
+
+        outState.putString("profileID", loadedProfileId);
     }
 
     @Override
@@ -108,11 +114,15 @@ public class FragmentProfile extends Fragment {
         super.onStart();
 
         // Display mode, disable all edit options
-        if (loadedProfile != null) {
+        if (loadedProfile != null || loadedProfileId != null) {
             infoCard.setVisibility(View.VISIBLE);
             loginControlsCard.setVisibility(View.GONE);
             notesLabel.setVisibility(View.VISIBLE);
-            ApplyInfo(loadedProfile, false);
+
+            if (loadedProfile != null)
+                ApplyInfo(loadedProfile, false);
+            else
+                GetUserInfo(loadedProfileId);
         }
         else {
             String token = AccessTokenUtils.GetAccessToken(requireContext());
@@ -152,8 +162,23 @@ public class FragmentProfile extends Fragment {
                 });
 
             } catch (IOException e) {
-                requireActivity().runOnUiThread(() ->
-                        Snackbar.make(requireView(), R.string.error_unrecognized_token, Snackbar.LENGTH_SHORT).show());
+                Activity activity = getActivity();
+                if (activity == null) return;
+
+                if (loadedProfileId != null) {
+                    activity.runOnUiThread(() -> {
+                        new MaterialAlertDialogBuilder(activity)
+                                .setTitle("Errore")
+                                .setMessage("Si è verificato un errore.")
+                                .setPositiveButton(android.R.string.ok, (v, m) -> v.dismiss())
+                                .setOnDismissListener((v) -> activity.finish())
+                                .show();
+                    });
+                }
+                else {
+                    activity.runOnUiThread(() ->
+                           Snackbar.make(requireView(), R.string.error_generic_server, Snackbar.LENGTH_SHORT).show());
+                }
             }
         }).start();
     }
@@ -170,6 +195,9 @@ public class FragmentProfile extends Fragment {
                     .placeholder(R.drawable.account_circle_24px)
                     .into(authorProfilePic)
             ;
+        }
+        else {
+            authorProfilePic.setImageResource(R.drawable.account_circle_24px);
         }
 
         if (profile.getBio() == null || profile.getBio().isEmpty())

@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <style name="AltTagChip" parent="TagChip">
+        <item name="chipBackgroundColor">?attr/colorSurfaceContainerHighest</item>
+    </style>
+
     <style name="TagChip" parent="Widget.Material3.Chip.Assist">
         <item name="android:checkable">false</item>
         <item name="android:clickable">false</item>

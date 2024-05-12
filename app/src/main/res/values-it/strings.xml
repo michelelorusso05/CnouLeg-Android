@@ -28,6 +28,10 @@
         <item>Biologia</item>
         <item>Economia</item>
         <item>Diritto</item>
+        <item>Arte</item>
+        <item>Musica</item>
+        <item>Filosofia</item>
+        <item>Educazione fisica</item>
         <item>Altro</item>
     </string-array>
     <string name="activity_read">Leggi un appunto</string>
@@ -179,4 +183,18 @@
     <string name="label_login_to_rate">Accedi per valutare.</string>
     <string name="label_must_be_logged_in">Effettua l\'accesso per farlo.</string>
     <string name="profile_notes">Appunti condivisi</string>
+    <string name="hint_search_bar">Cerca</string>
+    <string name="label_min_rating">Valutazione minima</string>
+
+    <plurals name="stars">
+        <item quantity="one">%d stella</item>
+        <item quantity="many">%d stelle</item>
+        <item quantity="other">%d stelle</item>
+    </plurals>
+    <string name="ratings_any">Qualsiasi</string>
+    <string name="dialog_search_filters">Filtri di ricerca</string>
+    <string name="dialog_apply">Applica</string>
+    <string name="menu_edit_note">Modifica appunto</string>
+    <string name="menu_delete_note">Elimina appunto</string>
+    <string name="edit_contents_info">Non è possibile modificare i contenuti allegati dopo aver pubblicato un appunto.</string>
 </resources>
