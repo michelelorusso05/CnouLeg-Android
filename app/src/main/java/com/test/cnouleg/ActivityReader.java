@@ -82,6 +82,12 @@ public class ActivityReader extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reader);
 
+        commentProfilePic = findViewById(R.id.comment_profile_pic);
+        loggedInLayout = findViewById(R.id.comment_bar_layout);
+        notLoggedInLayout = findViewById(R.id.not_logged_in_bar);
+
+        comment = findViewById(R.id.comment_text_field);
+
         if (savedInstanceState == null)
             savedInstanceState = getIntent().getExtras();
 
@@ -136,11 +142,6 @@ public class ActivityReader extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerView);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-
-        loggedInLayout = findViewById(R.id.comment_bar_layout);
-        notLoggedInLayout = findViewById(R.id.not_logged_in_bar);
-
-        comment = findViewById(R.id.comment_text_field);
 
         View bottomBar = findViewById(R.id.bottomCommentBar);
         Drawable endIcon = comment.getEndIconDrawable();
@@ -294,8 +295,6 @@ public class ActivityReader extends AppCompatActivity {
                 }
             }
         });
-
-        commentProfilePic = findViewById(R.id.comment_profile_pic);
 
         commentAdapter = new CommentAdapter(this, viewID -> {
             try {

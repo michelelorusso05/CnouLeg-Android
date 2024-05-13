@@ -18,6 +18,8 @@ import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.MaterialAutoCompleteTextView;
 import com.google.android.material.textfield.TextInputLayout;
+import com.test.cnouleg.api.LoginResult;
+import com.test.cnouleg.utils.AccessTokenUtils;
 import com.test.cnouleg.utils.SharedUtils;
 
 import java.io.IOException;
@@ -171,8 +173,9 @@ public class StepperRegistration1 extends StepperFragment {
                     public void onResponse(@NonNull Call call, @NonNull Response response) {
                         response.body().close();
 
-                        requireActivity().runOnUiThread(() ->
-                                registrationFormViewModel.UpdateSecondStep(f_birthdate, f_gender));
+                        TryLogin(state.email, state.password, () ->
+                            requireActivity().runOnUiThread(() ->
+                                registrationFormViewModel.UpdateSecondStep(f_birthdate, f_gender)));
                     }
                 });
             }
@@ -195,5 +198,48 @@ public class StepperRegistration1 extends StepperFragment {
         }
 
         return validate;
+    }
+
+    private void TryLogin(String email, String password, Runnable then) {
+        HashMap<String, String> requestBodyMap = new HashMap<>();
+
+        requestBodyMap.put("email", email);
+        requestBodyMap.put("password", password);
+
+        String json;
+        try {
+            json = StaticData.getMapper().writeValueAsString(requestBodyMap);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+
+        RequestBody requestBody = RequestBody.create(json, MediaType.parse("application/json"));
+
+        Request.Builder builder = new Request.Builder()
+                .url(SharedUtils.GetServer(context) + "/api/login/")
+                .post(requestBody);
+
+        StaticData.getClient().newCall(builder.build()).enqueue(new Callback() {
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                requireActivity().runOnUiThread(() -> {
+                    progressIndicator.setVisibility(View.GONE);
+                    nextButton.setEnabled(true);
+
+                    Snackbar.make(nextButton, R.string.error_generic_server, Snackbar.LENGTH_SHORT).show();
+                });
+            }
+
+            @Override
+            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                String body = response.body().string();
+                String token = StaticData.getMapper().readValue(body, LoginResult.class).getToken();
+                response.body().close();
+
+                AccessTokenUtils.SaveToken(context, token);
+
+                then.run();
+            }
+        });
     }
 }
